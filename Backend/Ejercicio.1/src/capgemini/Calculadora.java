@@ -2,11 +2,11 @@ package capgemini;
 
 public class Calculadora {
 	
-	private String cadena = "";
-	private char cadena_div[];
+	//private String cadena = "";
+	//private char cadena_div[];
     
-	public void calcular(String cadena) {
-		this.cadena = cadena;
+	public double calcular(String cadena) {
+		//this.cadena = cadena;
 		char cadena_div[] = cadena.toCharArray();
 		double b = 0.0;
 		String num = "";
@@ -22,32 +22,30 @@ public class Calculadora {
             if (cadena_div[i] == '+') {
             	double a = Double.parseDouble(num);
             	b += a;
-            	a = 0;
+            	num = "";
             }
             
             if (cadena_div[i] == '-') {
             	double a = Double.parseDouble(num);
             	b -= a;
-            	a = 0;
+            	num = "";
             }
             
             if (cadena_div[i] == '/') {
             	double a = Double.parseDouble(num);
             	b /= a;
-            	a = 0;
+            	num = "";
             }
             
             if (cadena_div[i] == '*') {
             	double a = Double.parseDouble(num);
             	b *= a;
-            	a = 0;
+            	num = "";
             }
-            
-            if (cadena_div[i] == '=') {
-            	System.out.println("La operación da como resultado " + b);
-            }
-			
+               
 		}
+		
+		return b;
 	}
 
 }
