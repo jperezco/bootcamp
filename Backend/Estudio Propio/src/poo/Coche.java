@@ -1,4 +1,4 @@
-package estudio.propio;
+package poo;
 
 public class Coche {
 	private int ruedas;
