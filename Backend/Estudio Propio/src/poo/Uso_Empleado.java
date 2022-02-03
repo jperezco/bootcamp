@@ -5,13 +5,25 @@ import java.util.*;
 public class Uso_Empleado {
 	public static void main(String[] args) {
 				
-		Empleado[] misEmpleados = new Empleado[4];
+		Jefatura jefe_RRHH = new Jefatura("Juan", 55000, 2006, 9, 25);
+		
+		jefe_RRHH.estableceIncentivo(2570);
+		
+		Empleado[] misEmpleados = new Empleado[6];
 		
 		misEmpleados[0] = new Empleado("Paco Gómez", 85000, 1990, 12, 17);
 		misEmpleados[1] = new Empleado("Ana López", 95000, 1995, 06, 02);
 		misEmpleados[2] = new Empleado("María Martín", 105000, 2002, 03, 15);
 		misEmpleados[3] = new Empleado("Antonio Fernández");
-				
+		//EL PROGRAMA ESTABA ESPERANDO UN OBJETO DE LA SUPERCLASE (EMPLEADO)
+		//PERO HA RECIBIDO UNO DE LA SUBCLASE (JEFATURA) SIN PROBLEMA. ESTO ES EL
+		//POLIMORFISMO.
+		misEmpleados[4] = jefe_RRHH;
+		misEmpleados[5] = new Jefatura("María", 95000, 1999, 05, 26);
+		
+		Jefatura jefa_Finanzas = (Jefatura)misEmpleados[5];
+		jefa_Finanzas.estableceIncentivo(55000); //CASTING
+		
 		for (Empleado e: misEmpleados) {
 			e.subeSueldo(5);
 		}
@@ -64,12 +76,17 @@ class Empleado {
 
 
 
-class Jefatura extends Empleado{
+final class Jefatura extends Empleado {
 	
 	public Jefatura(String nom, double sue, int agno, int mes, int dia) {
 		super(nom, sue, agno, mes, dia);
 	}
 	
+	/**
+	 * @author Javier
+	 * @param b
+	 * @return Incentivo del jefe
+	 */
 	public void estableceIncentivo(double b) {
 		incentivo = b;
 	}
@@ -79,5 +96,6 @@ class Jefatura extends Empleado{
 		                                        //Y ALMACENAMOS LO QUE DEVUELVE
 		return sueldoJefe + incentivo;
 	}
+	
 	private double incentivo;
 }
