@@ -77,6 +77,14 @@ class JuegoDelNumeroTest {
 			assertEquals("Upsss! Se acabaron los intentos, el número era el " + juego.numeroBuscado,
 					juego.getResultado());
 		}
+		
+		@Test
+		void testFinalizadoException() throws JuegoException{
+			juego.jugada(50);
+			//SI INTENTAS JUGAR UNA VEZ HAS ACERTADO: EXCEPTION.
+			assertThrows(JuegoException.class, () -> juego.jugada(50));
+		}
+		
 	}
 
 	@Nested
