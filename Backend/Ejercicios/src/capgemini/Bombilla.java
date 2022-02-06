@@ -12,7 +12,10 @@ public class Bombilla {
 		horas = 10.0;
 	}
 	
-	public String encender(double horas) {
+	public String encender(double horas) throws Exception{
+		if (horas < 0.0) {
+			throw new Exception("Las horas deben ser positivas");
+		}
 		if (this.horas >= horas) {
 			estado =  true;
 			this.horas -= horas;
@@ -36,7 +39,10 @@ public class Bombilla {
 		
 	}
 	
-	public void cambiaPotencia(int potencia) {
+	public void cambiaPotencia(int potencia) throws Exception {
+		if (potencia < 0) {
+			throw new Exception ("La potencia no puede ser negativa");
+		}
 		this.potencia = potencia;
 	}
 	
@@ -55,8 +61,12 @@ public class Bombilla {
 		return "La bombilla es de color " + color;
 	}
 	
-	public void recargar(double horas) {
+	public void recargar(double horas) throws Exception {
+		if (horas < 0.0) {
+			throw new Exception("No puedes recargar horas negativas");
+		}
 		this.horas += horas;
+		
 	}
 	
 }
