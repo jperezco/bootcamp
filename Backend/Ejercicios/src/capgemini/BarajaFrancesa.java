@@ -36,6 +36,7 @@ public class BarajaFrancesa {
 					+ " baraja");
 		}
 		for (int i = 0; i < numeroDeCartasAQuitar; i++) {
+			cartasRepartidas.add(baraja.get(0));
 			baraja.remove(0);
 		}
 	}
@@ -43,5 +44,16 @@ public class BarajaFrancesa {
 	public void barajarBarajaFrancesa() {
 		Collections.shuffle(baraja);
 	}
+	
+	public ArrayList<String> enseñaLasCartasRepartidas() {
+		return cartasRepartidas;
+	}
+	
+	public void juntaBaraja() {
+		baraja.addAll(cartasRepartidas);
+		cartasRepartidas.clear();
+	}
 		
 }
+
+	
