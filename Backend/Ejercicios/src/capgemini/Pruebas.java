@@ -1,17 +1,14 @@
 package capgemini;
 
-import capgemini.CartaFrancesa.Palos;
-import capgemini.CartaFrancesa.Valores;
-
 public class Pruebas {
 
-	public static void main(String[] args) {
-		Palos palo = Palos.DIAMANTES;
-		System.out.println(palo.dameNumeroAsociado());
-		System.out.println(Palos.damePaloAsociado(1));
-		Valores valor = Valores.JOTA;
-		System.out.println(valor.dameNumeroAsociado());
-
+	public static void main(String[] args) throws Exception {
+		BarajaFrancesa barajaFrancesa = new BarajaFrancesa();
+		System.out.println("Esta es la baraja francesa ordenada");
+		System.out.println(barajaFrancesa.enseñaBarajaFrancesa());
+		barajaFrancesa.barajarBarajaFrancesa();
+		System.out.println("Esta es la baraja francesa desordenada");
+		System.out.println(barajaFrancesa.enseñaBarajaFrancesa());
 	}
 
 }
