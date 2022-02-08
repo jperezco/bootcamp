@@ -7,7 +7,11 @@ public class Movimiento {
 	
 	public Movimiento(String movimiento) throws Exception{
 		posIni = new Posicion(movimiento.charAt(1), movimiento.charAt(0));
-		posFin = new Posicion(movimiento.charAt(3), movimiento.charAt(2));		
+		posFin = new Posicion(movimiento.charAt(3), movimiento.charAt(2));
+		if (posIni.equals(posFin) && posIni != null && posFin != null) {
+			throw new Exception("O las posiciones iniciales y finales son las mimsas "
+					+ "o no las has introducido con un formato correcto");
+		}
 	}
 	
 	public Posicion posicionInicial() {
@@ -45,14 +49,14 @@ public class Movimiento {
 	}
 	
 	public int deltaFila() {
-		if ((posFin.fila() - posIni.fila()) > 0) {return 1;}
-		else if ((posFin.fila() - posIni.fila()) < 0) {return -1;}
+		if (saltoHorizontal() > 0) {return 1;}
+		else if (saltoHorizontal() < 0) {return -1;}
 		else {return 0;}		
 	}
 	
 	public int deltaColumna() {
-		if ((posFin.columna() - posIni.columna()) > 0) {return 1;}
-		else if ((posFin.columna() - posIni.columna()) < 0) {return -1;}
+		if (saltoVertical() > 0) {return 1;}
+		else if (saltoVertical() < 0) {return -1;}
 		else {return 0;}		
 	}
 

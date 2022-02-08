@@ -28,7 +28,7 @@ public class Posicion {
 			case 'F': case 'f': this.laColumna = 6;
 			case 'G': case 'g': this.laColumna = 7;
 			case 'H': case 'h': this.laColumna = 8;
-			default: throw new Exception("Te has colocado fuera del tablero");
+			default: throw new Exception("No estás usando la notación internacional");
 		}	
 	}
 	
