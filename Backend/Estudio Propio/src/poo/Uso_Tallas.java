@@ -10,6 +10,7 @@ public class Uso_Tallas {
 	enum Talla {
 		MINI("S"), MEDIANO("M"), GRANDE ("L"), MUY_GRANDE("XL");
 		
+		private String abreviatura;
 		// EL CONSTRUCOTR DEBE SER PRIVADO YA QUE EL TIPO ENUM NO PUEDE INSTANCIARSE 
 		// DESDE FUERA.
 		private Talla (String abreviatura) {
@@ -18,9 +19,7 @@ public class Uso_Tallas {
 		
 		public String dameAbreviatura() {
 			return abreviatura;
-		}
-		
-		private String abreviatura;
+		}	
 	}
 
 	
@@ -35,11 +34,7 @@ public class Uso_Tallas {
 		
 		Talla la_talla = Enum.valueOf(Talla.class, entrada_datos);
 		
-		System.out.println("Talla = " + la_talla);
-		
+		System.out.println("Talla = " + la_talla);		
 		System.out.println("Abreviatura = " + la_talla.dameAbreviatura());
-		
-
 	}
-
 }
