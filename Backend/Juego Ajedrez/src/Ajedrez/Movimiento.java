@@ -30,6 +30,30 @@ public class Movimiento {
 		}else{return false;}
 	}
 	
+	public int saltoVertical() {
+		return posFin.columna() - posIni.columna();
+	}
 	
+	public int saltoHorizontal() {
+		return posFin.fila() - posIni.fila();
+	}
+	
+	public boolean esDiagonal() {
+		if (Math.abs(saltoVertical()) == Math.abs(saltoHorizontal())) {
+			return true;
+		}else {return false;}
+	}
+	
+	public int deltaFila() {
+		if ((posFin.fila() - posIni.fila()) > 0) {return 1;}
+		else if ((posFin.fila() - posIni.fila()) < 0) {return -1;}
+		else {return 0;}		
+	}
+	
+	public int deltaColumna() {
+		if ((posFin.columna() - posIni.columna()) > 0) {return 1;}
+		else if ((posFin.columna() - posIni.columna()) < 0) {return -1;}
+		else {return 0;}		
+	}
 
 }
