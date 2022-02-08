@@ -19,11 +19,17 @@ public class Movimiento {
 	}
 	
 	public boolean esVertical() {
+		if (posIni.fila() != posFin.fila() && posIni.columna() == posFin.columna()) {
+			return true;
+		}else{return false;}
+	}
+	
+	public boolean esHorizontal() {
 		if (posIni.fila() == posFin.fila() && posIni.columna() != posFin.columna()) {
 			return true;
 		}else{return false;}
 	}
 	
-	public boolean 
+	
 
 }
