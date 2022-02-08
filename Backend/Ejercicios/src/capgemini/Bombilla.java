@@ -65,8 +65,7 @@ public class Bombilla {
 		if (horas < 0.0) {
 			throw new Exception("No puedes recargar horas negativas");
 		}
-		this.horas += horas;
-		
+		this.horas += horas;		
 	}
 	
 }
