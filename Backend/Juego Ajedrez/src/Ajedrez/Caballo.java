@@ -1,8 +1,8 @@
 package Ajedrez;
 
-public class Rey extends Pieza{
+public class Caballo extends Pieza{
 	
-	public Rey (Color color) {
+	public Caballo (Color color) {
 		super(color);
 	}
 	

@@ -1,5 +1,11 @@
 package Ajedrez;
 
+
+/**
+ * 
+ *@author Javier Pérez Córdoba
+ *
+ */
 public class Posicion {
 	
 	private int laFila;
