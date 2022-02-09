@@ -77,17 +77,31 @@ public class Tablero {
 		}else {return true;}		
 	}
 	
-	public void quitaPieza(int fila, int columna) {
+	public void quitaPieza(int fila, int columna) throws Exception{
 		if (hayPieza(fila, columna)) {
-			
-
+			piezas[fila-1][columna-1] = null;
+		} else {
+			throw new Exception("No hay pieza que quitar");
 		}
 	}
 	
-	public void quitaPieza(Posicion posicion) {
-		if (escaque(fila, columna) instanceof Pieza) {
-
+	public void quitaPieza(Posicion posicion) throws Exception{
+		if (hayPieza(posicion)) {
+			piezas[posicion.fila()-1][posicion.columna()-1] = null;
+		} else {
+			throw new Exception("No hay pieza que quitar");
 		}
+	}
+	
+	public void mover(Movimiento movimiento) throws Exception{
+		piezas[movimiento.posicionFinal().fila()-1][movimiento.posicionFinal().columna()-1] = 
+				piezas[movimiento.posicionInicial().fila()-1][movimiento.posicionInicial().columna()-1];
+		
+		quitaPieza(movimiento.posicionInicial());
+	}
+	
+	public Object clone() {
+		return piezas.clone();
 	}
 
 }
