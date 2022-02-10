@@ -28,40 +28,70 @@ class MovimientoTest {
 
 	@Test
 	void testMovimiento() throws Exception{
+		
 		assertThrows(Exception.class ,() -> new Movimiento("a3b45"));
 		assertThrows(Exception.class ,() -> new Movimiento(""));
 		assertThrows(Exception.class ,() -> new Movimiento("a3b"));
 		assertThrows(Exception.class ,() -> new Movimiento(null));
+		
+		Movimiento movimiento = new Movimiento("a3H8");
+		
+		assertEquals(3,movimiento.posicionInicial().fila());
+		assertEquals(1,movimiento.posicionInicial().columna());
+		assertEquals(8,movimiento.posicionFinal().fila());
+		assertEquals(8,movimiento.posicionFinal().columna());
+		
+		assertThrows(Exception.class ,() -> new Movimiento("c5C5"));		
 	}
 
 	@Test
-	void testPosicionInicial() {
-		fail("Not yet implemented");
+	void testPosicionInicial() throws Exception{
+		Movimiento movimiento = new Movimiento("c7a2");
+		assertEquals(7,movimiento.posicionInicial().fila());
+		assertEquals(3,movimiento.posicionInicial().columna());
 	}
 
 	@Test
-	void testPosicionFinal() {
-		fail("Not yet implemented");
+	void testPosicionFinal() throws Exception{
+		Movimiento movimiento = new Movimiento("c7a2");
+		assertEquals(2,movimiento.posicionFinal().fila());
+		assertEquals(1,movimiento.posicionFinal().columna());
 	}
 
 	@Test
-	void testEsVertical() {
-		fail("Not yet implemented");
+	void testEsVertical() throws Exception{
+		Movimiento movimiento = new Movimiento("c7c2");
+		assertTrue(movimiento.esVertical());
+		Movimiento movimiento2 = new Movimiento("c7b7");
+		assertFalse(movimiento2.esVertical());
 	}
 
 	@Test
-	void testEsHorizontal() {
-		fail("Not yet implemented");
+	void testEsHorizontal() throws Exception{
+		Movimiento movimiento = new Movimiento("d7a7");
+		assertTrue(movimiento.esHorizontal());
+		Movimiento movimiento2 = new Movimiento("a2H3");
+		assertFalse(movimiento2.esHorizontal());
 	}
 
 	@Test
-	void testSaltoVertical() {
-		fail("Not yet implemented");
+	void testSaltoHorizontal() throws Exception{
+		Movimiento movimiento = new Movimiento("G7a2");
+		assertEquals(-6, movimiento.saltoHorizontal());
+		Movimiento movimiento2 = new Movimiento("G7g2");
+		assertEquals(0, movimiento2.saltoHorizontal());
+		Movimiento movimiento3 = new Movimiento("G7h2");
+		assertEquals(1, movimiento3.saltoHorizontal());
 	}
 
 	@Test
-	void testSaltoHorizontal() {
-		fail("Not yet implemented");
+	void testSaltoVertical() throws Exception{
+		Movimiento movimiento = new Movimiento("G7a2");
+		assertEquals(-5, movimiento.saltoVertical());
+		Movimiento movimiento2 = new Movimiento("c3d3");
+		assertEquals(0, movimiento2.saltoVertical());
+		Movimiento movimiento3 = new Movimiento("c5D6");
+		assertEquals(1, movimiento3.saltoVertical());
 	}
 
 	@Test

@@ -39,11 +39,11 @@ public class Movimiento {
 		}else{return false;}
 	}
 	
-	public int saltoVertical() {
+	public int saltoHorizontal() {
 		return posFin.columna() - posIni.columna();
 	}
 	
-	public int saltoHorizontal() {
+	public int saltoVertical() {
 		return posFin.fila() - posIni.fila();
 	}
 	
