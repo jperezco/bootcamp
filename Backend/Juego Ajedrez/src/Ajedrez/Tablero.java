@@ -31,37 +31,63 @@ public class Tablero {
 	
 	public Pieza damePieza(int fila, int columna) throws Exception{
 		
-		if (esValido(fila)) {
-			fila -= 1;
-		} else {
+		if (esValido(fila)) {}
+		else {
 			throw new Exception("La fila debe estar entre 1 y 8");
 		}
 		
-		if (esValido(columna)) {
-			columna -= 1;
-		} else {
+		if (esValido(columna)) {} 
+		else {
 			throw new Exception("La columna debe estar entre 1 y 8");
 		}
 		
 		if (hayPieza(fila, columna)) {
-			return piezas[fila][columna];
+			return piezas[fila-1][columna-1];
 		} else {
 			throw new Exception("No tienes ninguna pieza en ese escaque");
 		}
 	}
 	
 	public Pieza damePieza(Posicion posicion) throws Exception{
+		
 		if (hayPieza(posicion)) {
 			return piezas[posicion.fila()-1][posicion.columna()-1];
 		} else {
 			throw new Exception("No tienes ninguna pieza en ese escaque");
 		}
-		
+	
 	}
 	
-	/*
-	 * Hay que implementar el ponPieza.
-	 */
+
+	public void ponPieza(Pieza pieza, int fila, int columna) throws Exception{
+		
+		if (esValido(fila)) {}
+		else {
+			throw new Exception("La fila debe estar entre 1 y 8");
+		}
+		
+		if (esValido(columna)) {} 
+		else {
+			throw new Exception("La columna debe estar entre 1 y 8");
+		}
+		
+		if (hayPieza(fila, columna)) {
+			throw new Exception("Ya hay una pieza en esa casilla");
+		} else {
+			piezas[fila-1][columna-1] = pieza;
+		}		
+	}
+	
+	
+	public void ponPieza(Pieza pieza, Posicion posicion) throws Exception{
+		
+		if (hayPieza(posicion)) {
+			throw new Exception("Ya hay una pieza en esa casilla");
+		} else {
+			piezas[posicion.fila()-1][posicion.columna()-1] = pieza;
+		}		
+	}
+	
 	
 	private boolean esValido(int i) {
 		if (i < 1 || i > 8) {
@@ -98,6 +124,9 @@ public class Tablero {
 	}
 	
 	public void mover(Movimiento movimiento) throws Exception{
+		if (hayPieza(movimiento.posicionInicial())) {
+			ponPieza
+		}
 		piezas[movimiento.posicionFinal().fila()-1][movimiento.posicionFinal().columna()-1] = 
 				piezas[movimiento.posicionInicial().fila()-1][movimiento.posicionInicial().columna()-1];
 		
@@ -106,6 +135,27 @@ public class Tablero {
 	
 	public Object clone() {
 		return piezas.clone();
+	}
+	
+	public Color colorEscaque(int fila, int columna) throws Exception{
+		
+		if (hayPieza(fila, columna)) {
+			return piezas[fila-1][columna-1].dameColor();
+		} else {
+			throw new Exception("No hay pieza en esa casilla");
+		}
+	}
+	
+	public boolean hayPiezasEntre(Movimiento movimiento) {
+		while (movimiento.posicionInicial() != movimiento.posicionFinal()) {
+			movimiento.posicionInicial().fila() += movimiento.deltaFila();
+			movimiento.posicionInicial().columna() += movimiento.deltaColumna();
+			if (hayPieza(movimiento.posicionInicial())) {
+				return true;
+				break;
+			}
+		}
+		return false;
 	}
 
 }

@@ -2,7 +2,7 @@ package Ajedrez;
 
 public abstract class Pieza {
 	
-	Color color;
+	private Color color;
 			
 	public Pieza(Color color) {
 		this.color = color;
