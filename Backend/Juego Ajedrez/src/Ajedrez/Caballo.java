@@ -7,7 +7,13 @@ public class Caballo extends Pieza{
 	}
 	
 	protected boolean esValido(Movimiento movimiento, Tablero tablero) {
-		return true;
+		int diferenciaDeSalto;
+		diferenciaDeSalto = Math.abs(movimiento.saltoHorizontal())
+				- Math.abs(movimiento.saltoVertical()); 
+		if (diferenciaDeSalto == 1 && tablero.hayPiezasEntre(movimiento) == false ||
+				diferenciaDeSalto == -1 && tablero.hayPiezasEntre(movimiento) == false) {
+			return true;
+		} else {return false;}
 	}
 
 }

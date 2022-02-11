@@ -146,13 +146,15 @@ public class Tablero {
 		}
 	}
 	
-	public boolean hayPiezasEntre(Movimiento movimiento) {
-		while (movimiento.posicionInicial() != movimiento.posicionFinal()) {
-			movimiento.posicionInicial().fila() += movimiento.deltaFila();
-			movimiento.posicionInicial().columna() += movimiento.deltaColumna();
-			if (hayPieza(movimiento.posicionInicial())) {
+	public boolean hayPiezasEntre(Movimiento movimiento) {		
+		Posicion posicionVariable;
+		while (posicionVariable != movimiento.posicionFinal()) {		
+			
+			auxiliarfila += movimiento.deltaFila();
+			
+			auxiliarcolumna += movimiento.deltaColumna();		
+			if (hayPieza(auxiliarfila, auxiliarcolumna)) {
 				return true;
-				break;
 			}
 		}
 		return false;

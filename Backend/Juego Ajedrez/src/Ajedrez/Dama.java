@@ -7,7 +7,13 @@ public class Dama extends Pieza{
 	}
 	
 	protected boolean esValido(Movimiento movimiento, Tablero tablero) {
-		return true;
+		if (movimiento.esHorizontal() && tablero.hayPiezasEntre(movimiento) == false ||
+			movimiento.esVertical() && tablero.hayPiezasEntre(movimiento) == false ||
+			movimiento.esDiagonal() && tablero.hayPiezasEntre(movimiento) == false) {
+			
+			return true;
+			
+		} else {return false;}
 	}
 
 }

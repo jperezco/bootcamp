@@ -7,7 +7,11 @@ public class Rey extends Pieza{
 	}
 	
 	protected boolean esValido(Movimiento movimiento, Tablero tablero) {
-		return true;
+		if (movimiento.esHorizontal() && Math.abs(movimiento.saltoHorizontal()) == 1 &&
+			tablero.hayPiezasEntre(movimiento) == false || movimiento.esVertical() &&
+			Math.abs(movimiento.saltoVertical()) == 1 &&
+			tablero.hayPiezasEntre(movimiento) == false) {
+			return true;
+		}else {return false;}
 	}
-
 }
