@@ -95,18 +95,31 @@ class MovimientoTest {
 	}
 
 	@Test
-	void testEsDiagonal() {
-		fail("Not yet implemented");
+	void testEsDiagonal() throws Exception{
+		Movimiento movimiento = new Movimiento("A1e5");
+		assertTrue(movimiento.esDiagonal());
+		Movimiento movimiento2 = new Movimiento("b8A7");
+		assertTrue(movimiento2.esDiagonal());
 	}
 
 	@Test
-	void testDeltaFila() {
-		fail("Not yet implemented");
+	void testDeltaFila() throws Exception{
+		Movimiento movimiento = new Movimiento("A1e5");
+		assertEquals(1, movimiento.deltaFila());
+		Movimiento movimiento2 = new Movimiento("F6E8");
+		assertEquals(-1, movimiento2.deltaFila());
+		Movimiento movimiento3 = new Movimiento("C4C5");
+		assertEquals(0, movimiento3.deltaFila());
 	}
 
 	@Test
-	void testDeltaColumna() {
-		fail("Not yet implemented");
+	void testDeltaColumna() throws Exception{
+		Movimiento movimiento = new Movimiento("A1e5");
+		assertEquals(1, movimiento.deltaColumna());
+		Movimiento movimiento2 = new Movimiento("F6E2");
+		assertEquals(-1, movimiento2.deltaColumna());
+		Movimiento movimiento3 = new Movimiento("B4h4");
+		assertEquals(0, movimiento3.deltaColumna());
 	}
 
 }

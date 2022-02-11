@@ -29,7 +29,7 @@ public class Tablero {
 //	}
 //	
 	
-	public Pieza escaque(int fila, int columna) throws Exception{
+	public Pieza damePieza(int fila, int columna) throws Exception{
 		
 		if (esValido(fila)) {
 			fila -= 1;
@@ -50,7 +50,7 @@ public class Tablero {
 		}
 	}
 	
-	public Pieza escaque(Posicion posicion) throws Exception{
+	public Pieza damePieza(Posicion posicion) throws Exception{
 		if (hayPieza(posicion)) {
 			return piezas[posicion.fila()-1][posicion.columna()-1];
 		} else {
@@ -58,6 +58,10 @@ public class Tablero {
 		}
 		
 	}
+	
+	/*
+	 * Hay que implementar el ponPieza.
+	 */
 	
 	private boolean esValido(int i) {
 		if (i < 1 || i > 8) {
