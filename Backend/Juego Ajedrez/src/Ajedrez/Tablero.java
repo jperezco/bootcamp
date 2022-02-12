@@ -124,13 +124,18 @@ public class Tablero {
 	}
 	
 	public void mover(Movimiento movimiento) throws Exception{
-		if (hayPieza(movimiento.posicionInicial())) {
-			ponPieza
-		}
+		
+		if (hayPieza(movimiento.posicionInicial()) == false) {
+			throw new Exception("No hay pieza que mover");
+		} else if(hayPiezasEntre(movimiento)) {
+			throw new Exception("No puedes realizar el movimiento porque hay piezas"
+					+ " entre las casillas inicial y final.");
+		} else {		
 		piezas[movimiento.posicionFinal().fila()-1][movimiento.posicionFinal().columna()-1] = 
 				piezas[movimiento.posicionInicial().fila()-1][movimiento.posicionInicial().columna()-1];
+		quitaPieza(movimiento.posicionInicial());		
+		}
 		
-		quitaPieza(movimiento.posicionInicial());
 	}
 	
 	public Object clone() {
@@ -146,14 +151,23 @@ public class Tablero {
 		}
 	}
 	
-	public boolean hayPiezasEntre(Movimiento movimiento) {		
-		Posicion posicionVariable;
-		while (posicionVariable != movimiento.posicionFinal()) {		
+	public boolean hayPiezasEntre(Movimiento movimiento) {				
+		int filaActualizable, columnaActualizable;
+		filaActualizable = movimiento.posicionInicial().fila();
+		columnaActualizable = movimiento.posicionInicial().columna();
+
+		
+		while (filaActualizable != movimiento.posicionFinal().fila() &&
+				columnaActualizable != movimiento.posicionFinal().columna()) {
+			filaActualizable += movimiento.deltaFila();
+			columnaActualizable += movimiento.deltaColumna();
 			
-			auxiliarfila += movimiento.deltaFila();
+			if (filaActualizable == movimiento.posicionFinal().fila() &&
+					columnaActualizable == movimiento.posicionFinal().columna()) {
+				return false;
+			}
 			
-			auxiliarcolumna += movimiento.deltaColumna();		
-			if (hayPieza(auxiliarfila, auxiliarcolumna)) {
+			if (hayPieza(filaActualizable, columnaActualizable)) {
 				return true;
 			}
 		}
