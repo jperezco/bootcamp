@@ -114,20 +114,19 @@ public class Movimiento {
 	 * 		   salto de columna.
 	 */
 	
-	public int deltaFila() {
+	public int deltaColumna() {
 		if (saltoHorizontal() > 0) {return 1;}
 		else if (saltoHorizontal() < 0) {return -1;}
 		else {return 0;}		
 	}
 	
 	/**
-	 * Método que indica si el movimiento implica un salto de fila hacia la derecha, un
-	 * salto de fila hacia la izquierda o si no hay salto de fila.
-	 * @return Un 1 si es a la derecha. Un -1 si es hacia la izquierda. Un 0 si no hay
-	 * 		   salto de fila.
+	 * Método que indica si el movimiento implica un salto de fila hacia arriba, un
+	 * salto de fila hacia abajo o si no hay salto de fila.
+	 * @return Un 1 si es abajo. Un -1 si es arriba. Un 0 si no hay salto de fila.
 	 */
 	
-	public int deltaColumna() {
+	public int deltaFila() {
 		if (saltoVertical() > 0) {return 1;}
 		else if (saltoVertical() < 0) {return -1;}
 		else {return 0;}		

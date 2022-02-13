@@ -12,9 +12,10 @@ public abstract class Pieza {
 		return color;
 	}
 	
-	protected abstract boolean esValido(Movimiento movimiento, Tablero tablero);
+	protected abstract boolean esValido(Movimiento movimiento, Tablero tablero) 
+			throws Exception;
 	
-	public void mover(Movimiento movimiento, Tablero tablero) {
+	public void mover(Movimiento movimiento, Tablero tablero) throws Exception{
 		
 	}
 

@@ -106,9 +106,9 @@ class MovimientoTest {
 	void testDeltaFila() throws Exception{
 		Movimiento movimiento = new Movimiento("A1e5");
 		assertEquals(1, movimiento.deltaFila());
-		Movimiento movimiento2 = new Movimiento("F6E8");
+		Movimiento movimiento2 = new Movimiento("F6E4");
 		assertEquals(-1, movimiento2.deltaFila());
-		Movimiento movimiento3 = new Movimiento("C4C5");
+		Movimiento movimiento3 = new Movimiento("C4D4");
 		assertEquals(0, movimiento3.deltaFila());
 	}
 
@@ -118,7 +118,7 @@ class MovimientoTest {
 		assertEquals(1, movimiento.deltaColumna());
 		Movimiento movimiento2 = new Movimiento("F6E2");
 		assertEquals(-1, movimiento2.deltaColumna());
-		Movimiento movimiento3 = new Movimiento("B4h4");
+		Movimiento movimiento3 = new Movimiento("B4B7");
 		assertEquals(0, movimiento3.deltaColumna());
 	}
 
