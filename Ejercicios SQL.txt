@@ -3,17 +3,38 @@ SELECT *
 FROM actor a
 WHERE a.first_name LIKE 'NICK'
 
+
 -- Obtener una lista con todos los distritos distintos (district en address).
 SELECT DISTINCT district
 FROM address
+
 
 -- Obtener las películas sobre agentes secretos (description contiene ‘Secret Agent’).
 SELECT *
 FROM film
 WHERE description LIKE '%Secret Agent%' 
 
+
 -- Mostrar la lista de las películas mas caras (coste por minuto)
 SELECT film_id, title, rental_rate/LENGTH `Coste por minuto`
 FROM film
 ORDER BY `Coste por minuto` DESC 
+
+
+-- Obtener los códigos y medias de gasto de los clientes que han gastado mas de 100 en menos de 25 operaciones.
+SELECT customer_id, COUNT(customer_id) AS `nº de operaciones`, 
+       SUM(amount) AS `Cantidad total gastada`, 
+		 SUM(amount)/COUNT(customer_id) AS `Media de gasto`
+FROM payment
+GROUP BY customer_id
+HAVING COUNT(customer_id) < 25 AND SUM(amount) > 100
+
+
+
+-- Obtener los 5 nombres de actor más repetidos (aprox).
+SELECT first_name, COUNT(*) AS `nº de actores`
+FROM actor 
+GROUP BY first_name
+ORDER BY `nº de actores` DESC LIMIT 5
+
 
