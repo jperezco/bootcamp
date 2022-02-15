@@ -3,6 +3,27 @@ SELECT *
 FROM actor a
 WHERE a.first_name LIKE 'NICK'
 
+-- Actores que tienen de primer nombre ‘Scarlett’.
+SELECT *
+FROM actor a
+WHERE a.first_name LIKE 'SCARLETT'
+
+
+-- Actores que contengan dos ‘O’ en su nombre y en una ‘A’ en su apellido.
+SELECT *
+FROM actor a
+WHERE a.first_name LIKE '%O%O%' AND a.last_name LIKE '%A%'
+
+-- Ciudades del country 61.
+SELECT *
+FROM city c
+WHERE c.country_id = 61
+
+-- Peliculas con una duracion entre 80 y 100.
+SELECT *
+FROM film
+WHERE film.length >= 80 AND film.length <= 100
+
 
 -- Obtener una lista con todos los distritos distintos (district en address).
 SELECT DISTINCT district
@@ -13,6 +34,12 @@ FROM address
 SELECT *
 FROM film
 WHERE description LIKE '%Secret Agent%' 
+
+
+-- Peliculas con un titulo de más de 12 letras.
+SELECT *
+FROM film 
+WHERE LENGTH(film.title) >= 12
 
 
 -- Mostrar la lista de las películas mas caras (coste por minuto)
@@ -38,3 +65,40 @@ GROUP BY first_name
 ORDER BY `nº de actores` DESC LIMIT 5
 
 
+-- Para felicitar el año nuevo chino se necesita el listado con los datos postales de los clientes residentes en China y Taiwan
+SELECT first_name, last_name, address, district, postal_code, city
+FROM customer AS c
+	INNER JOIN address AS a ON c.address_id = a.address_id
+	INNER JOIN city AS ci ON a.city_id = ci.city_id
+	INNER JOIN country AS co ON ci.country_id = co.country_id
+WHERE country LIKE 'Taiwan' OR country LIKE 'China'
+
+
+-- Elaborar el ranking de los países que más alquilan las películas de GINA DEGENERES.
+SELECT a.first_name, country.country
+FROM actor a
+	INNER JOIN film_actor fa ON a.actor_id = fa.actor_id
+	INNER JOIN film f ON fa.film_id = f.film_id
+	INNER JOIN inventory i ON f.film_id = i.film_id
+	INNER JOIN rental r ON i.inventory_id = r.inventory_id
+	INNER JOIN customer c ON r.customer_id = c.customer_id
+	INNER JOIN address ad ON c.address_id = ad.address_id
+	INNER JOIN city ON ad.city_id = city.city_id
+	INNER JOIN country ON city.country_id = country.country_id
+WHERE a.first_name LIKE 'GINA'
+ORDER BY country.country
+
+
+-- Mostrar el country, la ciudad y dirección de cada miembro del staff.
+SELECT country.country, city.city, address.address, address.address2, staff.first_name, staff.last_name
+FROM staff 
+	INNER JOIN address ON staff.address_id = address.address_id
+	INNER JOIN city ON address.city_id = city.city_id
+	INNER JOIN country ON city.country_id = country.country_id
+
+
+-- Ciudades del country ‘Spain’.
+SELECT *
+FROM city c
+	INNER JOIN country co ON c.country_id = co.country_id
+WHERE co.country LIKE 'Spain'
