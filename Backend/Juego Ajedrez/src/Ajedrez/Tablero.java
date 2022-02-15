@@ -118,33 +118,24 @@ public class Tablero {
 	}
 	
 	public Color colorEscaque(int fila, int columna) throws Exception{
-		
-		if (hayPieza(fila, columna)) {
-			return piezas[fila-1][columna-1].dameColor();
+		if ((columna % 2) == (fila % 2)) {
+			return Color.BLANCO;
 		} else {
-			throw new Exception("No hay pieza en esa casilla");
+			return Color.NEGRO;
 		}
 	}
 	
-	public boolean hayPiezasEntre(Movimiento movimiento) {				
-		int filaActualizable, columnaActualizable;
-		filaActualizable = movimiento.posicionInicial().fila();
-		columnaActualizable = movimiento.posicionInicial().columna();
-
+	public boolean hayPiezasEntre(Movimiento movimiento) throws Exception{				
+		if (!movimiento.esVertical() && !movimiento.esHorizontal() && !movimiento.esDiagonal())
+			throw new Exception("No se puede realizar el movimiento");
+		Posicion siguiente = new Posicion(movimiento.posicionInicial().fila() + movimiento.deltaFila(),
+				movimiento.posicionInicial().columna() + movimiento.deltaColumna());
 		
-		while (filaActualizable != movimiento.posicionFinal().fila() &&
-				columnaActualizable != movimiento.posicionFinal().columna()) {
-			filaActualizable += movimiento.deltaFila();
-			columnaActualizable += movimiento.deltaColumna();
-			
-			if (filaActualizable == movimiento.posicionFinal().fila() &&
-					columnaActualizable == movimiento.posicionFinal().columna()) {
-				return false;
-			}
-			
-			if (hayPieza(filaActualizable, columnaActualizable)) {
+		while(!siguiente.equals(movimiento.posicionFinal())) {
+			if(hayPieza(siguiente))
 				return true;
-			}
+			siguiente = new Posicion(siguiente.fila() + movimiento.deltaFila(),
+					siguiente.columna() + movimiento.deltaColumna());
 		}
 		return false;
 	}

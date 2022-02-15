@@ -6,10 +6,10 @@ public class Dama extends Pieza{
 		super(color);
 	}
 	
-	protected boolean esValido(Movimiento movimiento, Tablero tablero) {
-		if (movimiento.esHorizontal() && tablero.hayPiezasEntre(movimiento) == false ||
-			movimiento.esVertical() && tablero.hayPiezasEntre(movimiento) == false ||
-			movimiento.esDiagonal() && tablero.hayPiezasEntre(movimiento) == false) {
+	protected boolean esValido(Movimiento movimiento, Tablero tablero) throws Exception{
+		if (movimiento.esHorizontal() && !tablero.hayPiezasEntre(movimiento) ||
+			movimiento.esVertical() && !tablero.hayPiezasEntre(movimiento) ||
+			movimiento.esDiagonal() && !tablero.hayPiezasEntre(movimiento)) {
 			
 			return true;
 			

@@ -6,11 +6,11 @@ public class Rey extends Pieza{
 		super(color);
 	}
 	
-	protected boolean esValido(Movimiento movimiento, Tablero tablero) {
+	protected boolean esValido(Movimiento movimiento, Tablero tablero) throws Exception{
 		if (movimiento.esHorizontal() && Math.abs(movimiento.saltoHorizontal()) == 1 &&
-			tablero.hayPiezasEntre(movimiento) == false || movimiento.esVertical() &&
+			!tablero.hayPiezasEntre(movimiento) || movimiento.esVertical() &&
 			Math.abs(movimiento.saltoVertical()) == 1 &&
-			tablero.hayPiezasEntre(movimiento) == false) {
+			!tablero.hayPiezasEntre(movimiento)) {
 			return true;
 		}else {return false;}
 	}

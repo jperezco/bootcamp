@@ -6,12 +6,12 @@ public class Caballo extends Pieza{
 		super(color);
 	}
 	
-	protected boolean esValido(Movimiento movimiento, Tablero tablero) {
+	protected boolean esValido(Movimiento movimiento, Tablero tablero) throws Exception{
 		int diferenciaDeSalto;
 		diferenciaDeSalto = Math.abs(movimiento.saltoHorizontal())
 				- Math.abs(movimiento.saltoVertical()); 
-		if (diferenciaDeSalto == 1 && tablero.hayPiezasEntre(movimiento) == false ||
-				diferenciaDeSalto == -1 && tablero.hayPiezasEntre(movimiento) == false) {
+		if (diferenciaDeSalto == 1 && !tablero.hayPiezasEntre(movimiento) ||
+				diferenciaDeSalto == -1 && !tablero.hayPiezasEntre(movimiento)) {
 			return true;
 		} else {return false;}
 	}

@@ -6,8 +6,8 @@ public class Torre extends Pieza{
 		super(color);
 	}
 	
-	protected boolean esValido(Movimiento movimiento, Tablero tablero) {
-		if (movimiento.esHorizontal() && tablero.hayPiezasEntre(movimiento) == false) {
+	protected boolean esValido(Movimiento movimiento, Tablero tablero) throws Exception{
+		if (movimiento.esHorizontal() && !tablero.hayPiezasEntre(movimiento)) {
 			return true;
 		} else {return false;}
 	}

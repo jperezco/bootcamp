@@ -16,7 +16,9 @@ public abstract class Pieza {
 			throws Exception;
 	
 	public void mover(Movimiento movimiento, Tablero tablero) throws Exception{
-		
+		if (esValido(movimiento, tablero)) {
+			tablero.mover(movimiento);
+		}	
 	}
 
 }
