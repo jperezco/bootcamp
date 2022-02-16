@@ -38,7 +38,7 @@ public class Peon extends Pieza{
 	
 	protected boolean esValido(Movimiento movimiento, Tablero tablero) throws Exception{
 		if (inicia(movimiento.posicionInicial()) && avanza(movimiento) && 
-				tablero.hayPiezasEntre(movimiento) == false && movimiento.esVertical()
+				!tablero.hayPiezasEntre(movimiento) && movimiento.esVertical()
 				&& movimiento.saltoVertical() == 2) {
 			return true;
 		} 

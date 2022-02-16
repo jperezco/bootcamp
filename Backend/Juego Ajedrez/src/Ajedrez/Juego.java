@@ -6,8 +6,8 @@ public class Juego {
 	private Color elTurno;
 	private boolean partidaActiva = false;
 	
-	public Object dameTablero() {
-		return elTablero.clone();
+	public Tablero dameTablero() {
+		return (Tablero)elTablero.clone();
 	}
 	
 	public Color dameTurno() {
@@ -15,6 +15,8 @@ public class Juego {
 	}
 	
 	public void inicializar() throws Exception{
+		
+		Tablero elTablero = new Tablero();
 		
 		Torre torreBlanca = new Torre(Color.BLANCO);
 		Caballo caballoBlanca = new Caballo(Color.BLANCO);
@@ -61,6 +63,8 @@ public class Juego {
 	
 	public void jugada(String jugada) throws Exception{
 		Movimiento movimiento = new Movimiento(jugada);
+		if (!elTablero.hayPieza(movimiento.posicionInicial()))
+			throw new Exception("No hay pieza que mover");
 		mover(movimiento);
 		cambiaTurno();
 	}
