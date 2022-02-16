@@ -102,3 +102,19 @@ SELECT *
 FROM city c
 	INNER JOIN country co ON c.country_id = co.country_id
 WHERE co.country LIKE 'Spain'
+
+
+
+-- Obtener el listado detallado de alquileres indicando el identificador de 
+-- alquiler, el titulo alquilado, las fechas de alquiler, devolución y tiempo 
+-- transcurrido, nombres del cliente (nombre con apellidos), empleado (nombre 
+-- con apellidos) y tienda (ciudad, país).
+
+SELECT  rental.rental_id, film.title
+FROM film 
+	INNER JOIN inventory ON film.film_id = inventory.film_id
+	INNER JOIN store ON inventory.store_id = store.store_id
+	INNER JOIN staff ON store.manager_staff_id = staff.staff_id
+	INNER JOIN payment ON staff.staff_id = payment.staff_id
+	INNER JOIN rental ON payment.rental_id = rental.rental_id
+	INNER JOIN customer ON rental.customer_id = customer.customer_id
