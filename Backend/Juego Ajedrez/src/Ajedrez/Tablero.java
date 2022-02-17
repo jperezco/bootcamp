@@ -114,6 +114,7 @@ public class Tablero {
 		}
 	}
 	
+	
 	public boolean hayPiezasEntre(Movimiento movimiento) throws Exception{				
 		if (!movimiento.esVertical() && !movimiento.esHorizontal() && 
 				!movimiento.esDiagonal())

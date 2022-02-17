@@ -23,8 +23,7 @@ public class Peon extends Pieza{
 	private boolean puedeComer(Movimiento movimiento, Tablero tablero) throws Exception{
 		if(avanza(movimiento) && movimiento.esDiagonal() && 
 				tablero.hayPieza(movimiento.posicionFinal()) &&
-				tablero.colorEscaque(movimiento.posicionFinal().fila(), 
-						movimiento.posicionFinal().columna()) != dameColor()) {
+				tablero.damePieza(movimiento.posicionFinal()).dameColor() != dameColor()) {
 			return true;
 		} else {return false;}
 	}

@@ -70,7 +70,7 @@ public class Juego {
 	}
 	
 	private void mover(Movimiento movimiento) throws Exception{
-		elTablero.mover(movimiento);
+		elTablero.damePieza(movimiento.posicionInicial()).mover(movimiento, elTablero);
 	}
 	
 	private void cambiaTurno() {
