@@ -1,12 +1,12 @@
 -- Obtener todos los actores de nombre Nick.
 SELECT *
 FROM actor a
-WHERE a.first_name LIKE 'NICK'
+WHERE a.first_name = 'NICK'
 
 -- Actores que tienen de primer nombre ‘Scarlett’.
 SELECT *
 FROM actor a
-WHERE a.first_name LIKE 'SCARLETT'
+WHERE a.first_name = 'SCARLETT'
 
 
 -- Actores que contengan dos ‘O’ en su nombre y en una ‘A’ en su apellido.
@@ -59,10 +59,11 @@ HAVING COUNT(customer_id) < 25 AND SUM(amount) > 100
 
 
 -- Obtener los 5 nombres de actor más repetidos (aprox).
-SELECT first_name, COUNT(*) AS `nº de actores`
+SELECT first_name, COUNT(*) AS Apariciones
 FROM actor 
 GROUP BY first_name
-ORDER BY `nº de actores` DESC LIMIT 5
+ORDER BY Apariciones DESC 
+LIMIT 5
 
 
 -- Para felicitar el año nuevo chino se necesita el listado con los datos postales de los clientes residentes en China y Taiwan
@@ -109,7 +110,6 @@ WHERE co.country LIKE 'Spain'
 -- alquiler, el titulo alquilado, las fechas de alquiler, devolución y tiempo 
 -- transcurrido, nombres del cliente (nombre con apellidos), empleado (nombre 
 -- con apellidos) y tienda (ciudad, país).
-
 SELECT  rental.rental_id, film.title
 FROM film 
 	INNER JOIN inventory ON film.film_id = inventory.film_id
@@ -118,3 +118,27 @@ FROM film
 	INNER JOIN payment ON staff.staff_id = payment.staff_id
 	INNER JOIN rental ON payment.rental_id = rental.rental_id
 	INNER JOIN customer ON rental.customer_id = customer.customer_id
+
+
+-- Nº Películas por categoría.
+SELECT category.name Categoría, COUNT(film.title) `Nº Películas`
+FROM category
+	INNER JOIN film_category ON category.category_id = film_category.category_id
+	INNER JOIN film ON film_category.film_id = film.film_id
+GROUP BY category.name
+
+
+-- Generar la lista diaria de alquileres vencidos no devueltos para poder llamar a los clientes y 
+-- pedirles que los devuelvan, para ello debe mostrar las fechas de alquiler y vencimiento, el 
+-- teléfono y nombre del cliente, así como el titulo de la película, priorizando los que mas tiempo
+--  llevan vencidos.
+SELECT r.rental_date alquiler, r.rental_date + INTERVAL f.rental_duration DAY vencimiento, 
+	a.phone telefono, CONCAT(c.first_name  + '' + c.last_name)
+FROM rental r
+	INNER JOIN customer c ON r.customer_id = c.customer_id
+	INNER JOIN address a ON c.address_id = a.address_id
+	INNER JOIN inventory i ON r.inventory_id = i.inventory_id
+	INNER JOIN film f ON i.film_id = f.film_id
+WHERE r.return_date IS NULL 
+	AND rental_date + INTERVAL f.rental_duration DAY < CURRENT_DATE()
+ORDER BY vencimiento, alquiler
