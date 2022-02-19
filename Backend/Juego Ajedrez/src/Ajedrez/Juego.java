@@ -7,7 +7,7 @@ public class Juego {
 	private boolean partidaActiva = false;
 	
 	public Tablero dameTablero() {
-		return (Tablero)elTablero.clone();
+		return elTablero.clone();
 	}
 	
 	public Color dameTurno() {
@@ -65,6 +65,11 @@ public class Juego {
 		Movimiento movimiento = new Movimiento(jugada);
 		if (!elTablero.hayPieza(movimiento.posicionInicial()))
 			throw new Exception("No hay pieza que mover");
+		if (elTablero.damePieza(movimiento.posicionInicial()).dameColor() != elTurno)
+			throw new Exception("Estás intentando mover una pieza que no es tuya.");
+		if (elTablero.hayPieza(movimiento.posicionFinal()) && 
+				elTablero.damePieza(movimiento.posicionFinal()).dameColor() == elTurno)
+			throw new Exception("No te puedes comer una pieza de tu propio color.");				
 		mover(movimiento);
 		cambiaTurno();
 	}

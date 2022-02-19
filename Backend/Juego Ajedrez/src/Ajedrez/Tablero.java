@@ -101,8 +101,8 @@ public class Tablero {
 	}
 
 	
-	public Object clone() {
-		return piezas.clone();
+	public Tablero clone() {
+		return this.clone();
 	}
 	
 	
