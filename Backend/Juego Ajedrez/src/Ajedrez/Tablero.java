@@ -50,8 +50,8 @@ public class Tablero {
 	
 	private boolean esValido(int i) {
 		if (i < 1 || i > 8) {
-			return true;
-		} else {return false;}
+			return false;
+		} else {return true;}
 	}
 
 	
