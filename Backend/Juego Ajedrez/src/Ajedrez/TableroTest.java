@@ -39,6 +39,8 @@ class TableroTest {
 
 	@Test
 	void testDamePiezaPosicion() {
+		Tablero tablero = new Tablero();
+		assertThrows(Exception.class ,() -> tablero.damePieza(0,1));
 		fail("Not yet implemented");
 	}
 
