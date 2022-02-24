@@ -3,6 +3,8 @@ package com.example.ioc;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+// Indicamos a Spring que mire esta clase. La hemos marcado como un servicio, pero eso es
+// opcional.
 @Service
 @Qualifier("despliegue")
 public class ServicioImpl implements Servicio {
