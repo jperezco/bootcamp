@@ -4,7 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.example.domains.contracts.CategoryRepository;
+import com.example.domains.contracts.repositories.CategoryRepository;
 import com.example.domains.contracts.services.CategoryService;
 import com.example.domains.entities.Category;
 import com.example.exceptions.DuplicateKeyException;
@@ -12,9 +12,8 @@ import com.example.exceptions.InvalidDataException;
 import com.example.exceptions.NotFoundException;
 
 @Service
-public class CategoryServiceImpl implements CategoryService{
-
-private CategoryRepository dao;
+public class CategoryServiceImpl implements CategoryService {
+	private CategoryRepository dao;
 	
 	public CategoryServiceImpl(CategoryRepository dao) {
 		this.dao = dao;
@@ -25,7 +24,6 @@ private CategoryRepository dao;
 		return dao.findAll();
 	}
 	
-
 	@Override
 	public Category getOne(Integer id) throws NotFoundException {
 		var item = dao.findById(id);
@@ -65,5 +63,4 @@ private CategoryRepository dao;
 	public void deleteById(Integer id) {
 		dao.deleteById(id);
 	}
-
 }

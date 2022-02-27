@@ -8,7 +8,7 @@ import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 import org.hibernate.validator.constraints.Length;
 
-import com.example.domains.entities.core.EntityBase;
+import com.example.domains.core.entities.EntityBase;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -30,12 +30,10 @@ public class Category extends EntityBase<Category> implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="category_id")
-	// Llamamos id a esta propiedad 
 	@JsonProperty("id")
 	private int categoryId;
 
 	@Column(name="last_update")
-	//Le estamos diciendo al hibernate que ignore esta columna.
 	@Generated(value = GenerationTime.ALWAYS)
 	private Timestamp lastUpdate;
 
@@ -46,26 +44,22 @@ public class Category extends EntityBase<Category> implements Serializable {
 
 	//bi-directional many-to-one association to FilmCategory
 	@OneToMany(mappedBy="category")
-	// Para que no serialice las películas
 	@JsonIgnore
 	private List<FilmCategory> filmCategories;
 
 	public Category() {
-	
 	}
-	
+
 	public Category(int categoryId) {
 		super();
 		this.categoryId = categoryId;
 	}
-	
 
 	public Category(int categoryId, String name) {
 		super();
 		this.categoryId = categoryId;
 		this.name = name;
 	}
-
 
 	public int getCategoryId() {
 		return this.categoryId;
@@ -127,7 +121,6 @@ public class Category extends EntityBase<Category> implements Serializable {
 		Category other = (Category) obj;
 		return categoryId == other.categoryId;
 	}
-	
-	
 
+	
 }

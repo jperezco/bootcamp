@@ -30,7 +30,6 @@ public class Address implements Serializable {
 	@Column(name="last_update")
 	private Timestamp lastUpdate;
 
-
 	private String phone;
 
 	@Column(name="postal_code")
