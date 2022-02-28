@@ -22,8 +22,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.example.domains.contracts.services.CategoryService;
-import com.example.domains.entities.Category;
+import com.example.domains.contracts.services.LanguageService;
+import com.example.domains.entities.Language;
 import com.example.exceptions.DuplicateKeyException;
 import com.example.exceptions.InvalidDataException;
 import com.example.exceptions.NotFoundException;
@@ -31,41 +31,36 @@ import com.example.exceptions.NotFoundException;
 import org.springframework.http.HttpStatus;
 
 @RestController
-@RequestMapping("/api/categorias")
-public class CategoryResource {
+@RequestMapping("/api/languages")
+public class LanguageResource {
 	@Autowired
-	private CategoryService srv;
+	private LanguageService srv;
 
-	// Estamos indicando que será un método GET. Luego nosotros en el return podemos darle
-    // lo que queramos, pero evidentemente deberíamos respetar el método que estamos 
-	// definiendo, pero podríamos hacer un DELETE en el método GET.
 	@GetMapping
-	public List<Category> getAll() {
+	public List<Language> getAll() {
 		return srv.getAll();
 	}
 	
-	// Método GET pero esta vez no me devuelvas todo, solo uno, que yo te indico mediante
-	// el Id.
 	@GetMapping(path = "/{id}")
-	public Category getOne(@PathVariable int id) throws NotFoundException {
+	public Language getOne(@PathVariable int id) throws NotFoundException {
 		return srv.getOne(id);
 	}
 	
 	@PostMapping
-	public ResponseEntity<Object> create(@Valid @RequestBody Category item) throws InvalidDataException, DuplicateKeyException {
+	public ResponseEntity<Object> create(@Valid @RequestBody Language item) throws InvalidDataException, DuplicateKeyException {
 		if(item.isInvalid())
 			throw new InvalidDataException(item.getErrorsMessage());
 		item = srv.add(item);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-			.buildAndExpand(item.getCategoryId()).toUri();
+			.buildAndExpand(item.getLanguageId()).toUri();
 		return ResponseEntity.created(location).build();
 
 	}
 
 	@PutMapping("/{id}")
 	@ResponseStatus(HttpStatus.ACCEPTED)
-	public void update(@PathVariable int id, @Valid @RequestBody Category item) throws InvalidDataException, NotFoundException {
-		if(id != item.getCategoryId())
+	public void update(@PathVariable int id, @Valid @RequestBody Language item) throws InvalidDataException, NotFoundException {
+		if(id != item.getLanguageId())
 			throw new InvalidDataException("No coinciden los identificadore");
 		if(item.isInvalid())
 			throw new InvalidDataException(item.getErrorsMessage());

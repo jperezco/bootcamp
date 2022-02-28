@@ -9,7 +9,6 @@ import javax.validation.Validator;
 import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -53,6 +52,7 @@ public class ActorResource {
 		if(actor.isInvalid())
 			throw new InvalidDataException(actor.getErrorsMessage());
 		actor = srv.add(actor);
+		// Le decimos a la URI que acabamos de crear un nuevo actor con su Id.
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
 			.buildAndExpand(actor.getActorId()).toUri();
 		return ResponseEntity.created(location).build();
@@ -60,6 +60,7 @@ public class ActorResource {
 	}
 
 	@PutMapping("/{id}")
+	// Fija el código HTTP que se te va a devolver.
 	@ResponseStatus(HttpStatus.ACCEPTED)
 	public void update(@PathVariable int id, @Valid @RequestBody ActorDTO item) throws InvalidDataException, NotFoundException {
 		if(id != item.getActorId())
@@ -71,6 +72,7 @@ public class ActorResource {
 	}
 
 	@DeleteMapping("/{id}")
+	// Devuélveme un 204.
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable int id) {
 		srv.deleteById(id);

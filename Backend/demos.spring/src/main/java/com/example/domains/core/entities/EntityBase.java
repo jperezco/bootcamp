@@ -9,7 +9,8 @@ import javax.validation.Validator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class EntityBase<E> {
+// Es abstracta porque no queremos que se instancie, solo la queremos para herencia.
+public abstract class EntityBase<E> {
 	
 	@Transient
 	@JsonIgnore
