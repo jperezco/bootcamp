@@ -9,6 +9,7 @@ import org.hibernate.annotations.GenerationTime;
 import org.hibernate.validator.constraints.Length;
 
 import com.example.domains.core.entities.EntityBase;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.sql.Timestamp;
 import java.util.List;
@@ -26,7 +27,7 @@ public class Country extends EntityBase<Country> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="country_id")
 	private int countryId;
 
@@ -40,23 +41,22 @@ public class Country extends EntityBase<Country> implements Serializable {
 
 	//bi-directional many-to-one association to City
 	@OneToMany(mappedBy="country")
+	@JsonIgnore
 	private List<City> cities;
 
 	public Country() {
 	}
-	
 
 	public Country(int countryId) {
 		super();
 		this.countryId = countryId;
 	}
-	
+
 	public Country(int countryId, @NotBlank @Length(max = 50) String country) {
 		super();
 		this.countryId = countryId;
 		this.country = country;
 	}
-
 
 	public int getCountryId() {
 		return this.countryId;
@@ -119,12 +119,9 @@ public class Country extends EntityBase<Country> implements Serializable {
 		return countryId == other.countryId;
 	}
 
-
 	@Override
 	public String toString() {
-		return "Country [countryId=" + countryId + ", country=" + country + ", lastUpdate=" + lastUpdate + ", cities="
-				+ cities + "]";
+		return "Country [countryId=" + countryId + ", country=" + country + ", lastUpdate=" + lastUpdate + "]";
 	}
-	
-	
+
 }
