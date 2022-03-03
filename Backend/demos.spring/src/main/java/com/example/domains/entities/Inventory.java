@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -40,6 +41,15 @@ public class Inventory implements Serializable {
 
 	public Inventory() {
 	}
+	
+	
+
+	public Inventory(int inventoryId) {
+		super();
+		this.inventoryId = inventoryId;
+	}
+
+
 
 	public int getInventoryId() {
 		return this.inventoryId;
@@ -94,5 +104,22 @@ public class Inventory implements Serializable {
 
 		return rental;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(inventoryId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Inventory))
+			return false;
+		Inventory other = (Inventory) obj;
+		return inventoryId == other.inventoryId;
+	}
+	
+	
 
 }

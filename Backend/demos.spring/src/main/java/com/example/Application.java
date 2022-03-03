@@ -15,6 +15,8 @@ import com.example.jdbc.ConsultaSQL;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import springfox.documentation.oas.annotations.EnableOpenApi;
+
 import java.sql.Date;
 import java.sql.Timestamp;
 
@@ -25,6 +27,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.CommandLineRunner;
 
+@EnableOpenApi
 @SpringBootApplication
 public class Application implements CommandLineRunner { 
 

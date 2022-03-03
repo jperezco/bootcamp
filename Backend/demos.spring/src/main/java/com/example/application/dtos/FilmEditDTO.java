@@ -62,6 +62,7 @@ public class FilmEditDTO {
 				);
 	}
 	
+	//target = entidad
 	public Film update(Film target) {
 //		target.setFilmId(filmId);
 		target.setTitle(title);
