@@ -2,8 +2,17 @@ package com.example.domains.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
+
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.Objects;
 import java.sql.Timestamp;
 
 
@@ -22,31 +31,54 @@ public class Payment implements Serializable {
 	@Column(name="payment_id")
 	private int paymentId;
 
+	@NotNull
+	@DecimalMin(value = "0.0", inclusive = false)
+	@Digits(integer = 5, fraction = 2)
 	private BigDecimal amount;
 
 	@Column(name="last_update")
+	@Generated(value = GenerationTime.ALWAYS)
 	private Timestamp lastUpdate;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="payment_date")
+	@PastOrPresent
+	@NotNull
 	private Date paymentDate;
 
 	//bi-directional many-to-one association to Customer
 	@ManyToOne
 	@JoinColumn(name="customer_id")
+	@NotNull
 	private Customer customer;
 
 	//bi-directional many-to-one association to Rental
 	@ManyToOne
 	@JoinColumn(name="rental_id")
+	@NotNull
 	private Rental rental;
 
 	//bi-directional many-to-one association to Staff
 	@ManyToOne
 	@JoinColumn(name="staff_id")
+	@NotNull
 	private Staff staff;
 
 	public Payment() {
+	}
+	
+	public Payment(int paymentId,
+			@NotNull @DecimalMin(value = "0.0", inclusive = false) @Digits(integer = 5, fraction = 2) BigDecimal amount,
+			@PastOrPresent @NotNull Date paymentDate, @NotNull Staff staff , @NotNull Rental rental) {
+		super();
+		this.paymentId = paymentId;
+		this.amount = amount;
+		this.paymentDate = paymentDate;
+		this.rental = rental;
+		this.staff = staff;		
+		if(rental != null) {
+			this.customer = rental.getCustomer();
+		}
 	}
 
 	public int getPaymentId() {
@@ -105,4 +137,25 @@ public class Payment implements Serializable {
 		this.staff = staff;
 	}
 
+	@Override
+	public int hashCode() {
+		return Objects.hash(paymentId);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Payment))
+			return false;
+		Payment other = (Payment) obj;
+		return paymentId == other.paymentId;
+	}
+
+	@Override
+	public String toString() {
+		return "Payment [paymentId=" + paymentId + ", customer=" + customer + ", rental=" + rental + "]";
+	}
+
+	
 }

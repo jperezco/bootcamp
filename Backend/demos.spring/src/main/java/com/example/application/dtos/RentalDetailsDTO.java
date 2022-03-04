@@ -7,6 +7,7 @@ import java.util.List;
 import com.example.domains.entities.Customer;
 import com.example.domains.entities.Film;
 import com.example.domains.entities.Inventory;
+import com.example.domains.entities.Language;
 import com.example.domains.entities.Payment;
 import com.example.domains.entities.Rental;
 import com.example.domains.entities.Staff;
@@ -34,7 +35,7 @@ public class RentalDetailsDTO {
 	@JsonProperty("Empleado")
 	private String staff;
 	@JsonProperty("Precio")
-	private List<BigDecimal> cantidad;
+	private List<PaymentDetailsDTO> cantidad;
 
 	public static RentalDetailsDTO from(Rental source) {
 		return new RentalDetailsDTO(
@@ -43,10 +44,9 @@ public class RentalDetailsDTO {
 				source.getInventory().getFilm().getTitle(),
 				source.getCustomer().getCustomerId(),
 				source.getCustomer().getFirstName() + " " + source.getCustomer().getLastName(),
-				source.getReturnDate(),
+				source.getReturnDate() == null ? null : source.getReturnDate(),
 				source.getStaff().getFirstName() + " " + source.getStaff().getLastName(),
-				source.getPayments().stream()
-					.map(item -> item.getAmount()).toList()
+				source.getPayments().stream().map(pago -> PaymentDetailsDTO.from(pago)).toList()
 				);
 
 	}

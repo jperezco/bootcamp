@@ -4,9 +4,12 @@ import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.constraints.NotNull;
+
 import com.example.domains.entities.Customer;
 import com.example.domains.entities.Inventory;
 import com.example.domains.entities.Language;
+import com.example.domains.entities.Payment;
 import com.example.domains.entities.Rental;
 import com.example.domains.entities.Staff;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -23,16 +26,19 @@ public class RentalEditDTO {
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date rentalDate;
 	@JsonProperty("idPelicula")
+	@NotNull
 	private int inventory;
 	@JsonProperty("idCliente")
+	@NotNull
 	private int customerid;
 	@JsonProperty("fechaDevolucion")
 	@JsonFormat(pattern = "yyyy-MM-dd")
 	private Date returnDate;
 	@JsonProperty("Empleado")
+	@NotNull
 	private int empleado;
 	@JsonProperty("Precio")
-	private List<BigDecimal> cantidad;
+	private List<PaymentEditDTO> cantidad;
 
 	public static RentalEditDTO from(Rental source) {
 		return new RentalEditDTO(
@@ -40,10 +46,9 @@ public class RentalEditDTO {
 				source.getRentalDate(),
 				source.getInventory().getInventoryId(),
 				source.getCustomer().getCustomerId(),
-				source.getReturnDate(),
+				source.getReturnDate() == null ? null : source.getReturnDate(),
 				source.getStaff().getStaffId(),
-				source.getPayments().stream()
-					.map(item -> item.getAmount()).toList()
+				source.getPayments().stream().map(pago -> PaymentEditDTO.from(pago)).toList()
 				);
 	}
 	
@@ -53,22 +58,51 @@ public class RentalEditDTO {
 				source.getRentalDate(),
 				new Inventory(source.getInventory()),
 				new Customer(source.getCustomerid()),
-				source.getReturnDate(),
-				new Staff(source.getEmpleado()),
-				null		
+				source.getReturnDate() == null ? null : source.getReturnDate(),
+				new Staff(source.getEmpleado())
 				);
 	}
 	
 	public Rental update(Rental target) {
 		target.setRentalId(rentalId);
 		target.setRentalDate(rentalDate);
-		if(target.getInventory().getInventoryId() != inventory)
-			target.setInventory(new Inventory(inventory));
-		if(target.getCustomer().getCustomerId() != customerid)
-			target.setCustomer(new Customer(customerid));
+		target.setInventory(new Inventory(inventory));
+		target.setCustomer(new Customer(customerid));
 		target.setReturnDate(returnDate);
-		if(target.getStaff().getStaffId() != empleado)
-			target.setStaff(new Staff(empleado));
+		target.setStaff(new Staff(empleado));
+		
+		//Borra los alquileres que sobran.
+		var delAlquiladas = target.getPayments().stream()
+				.filter(item -> cantidad.stream().noneMatch(pago -> pago.getPaymentId() == item.getPaymentId()))
+				.toList();
+		delAlquiladas.forEach(item -> target.removePayment(item));
+		
+		//Actualizo los alquileres que han quedado.
+		target.getPayments().forEach(item -> {
+			var nuevoPago = cantidad.stream().filter(pago -> pago.getPaymentId() == item.getPaymentId()).findFirst().get();
+			if(item.getAmount() != nuevoPago.getAmount()) {
+				item.setAmount(nuevoPago.getAmount());
+			}
+			if(item.getPaymentDate() != nuevoPago.getFecha()) {
+				item.setPaymentDate(nuevoPago.getFecha());
+			}
+			
+			if(item.getStaff().getStaffId() != nuevoPago.getEmpleado()) {
+				item.setStaff(new Staff(nuevoPago.getEmpleado()));
+			}
+		});
+		
+		//Añadimos los alquileres nuevos.
+		cantidad.stream()
+			.filter(paymentDTO -> target.getPayments().stream().noneMatch(alquiler -> alquiler.getPaymentId() == paymentDTO.getPaymentId()))
+			.forEach(paymentDTO -> target.addPayment(new Payment(
+					paymentDTO.getPaymentId(), 
+					paymentDTO.getAmount(),
+					paymentDTO.getFecha(),
+					new Staff(paymentDTO.getEmpleado()),
+					target)));
+		
+		return target;
 		
 	}
 

@@ -22,15 +22,11 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.example.application.dtos.FilmDetailsDTO;
-import com.example.application.dtos.FilmEditDTO;
-import com.example.application.dtos.FilmShortDTO;
+
 import com.example.application.dtos.RentalDetailsDTO;
 import com.example.application.dtos.RentalEditDTO;
 import com.example.application.dtos.RentalShortDTO;
-import com.example.domains.contracts.services.FilmsService;
 import com.example.domains.contracts.services.RentalsService;
-import com.example.domains.entities.Rental;
 import com.example.exceptions.DuplicateKeyException;
 import com.example.exceptions.InvalidDataException;
 import com.example.exceptions.NotFoundException;
@@ -69,41 +65,41 @@ public class RentalResource {
 			throws NotFoundException {
 			return RentalEditDTO.from(srv.getOne(id));
 	}
-//
-//	@PostMapping
-//	@Transactional
-//	public ResponseEntity<Object> create(@Valid @RequestBody FilmEditDTO item)
-//			throws InvalidDataException, DuplicateKeyException, NotFoundException {
-//		var entity = FilmEditDTO.from(item);
-//		if (entity.isInvalid())
-//			throw new InvalidDataException(entity.getErrorsMessage());
-//		entity = srv.add(entity);
-//		entity = srv.getOne(entity.getFilmId());
-//		item.update(entity);
-//		srv.change(entity);
-//		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-//				.buildAndExpand(entity.getFilmId()).toUri();
-//		return ResponseEntity.created(location).build();
-//
-//	}
-//
-//	@PutMapping("/{id}")
-//	@ResponseStatus(HttpStatus.ACCEPTED)
-//	@Transactional
-//	public void update(@PathVariable int id, @Valid @RequestBody FilmEditDTO item)
-//			throws InvalidDataException, NotFoundException {
-//		if (id != item.getFilmId())
-//			throw new InvalidDataException("No coinciden los identificadores");
-//		var entity = srv.getOne(id);
-//		item.update(entity);
-//		if (entity.isInvalid())
-//			throw new InvalidDataException(entity.getErrorsMessage());
-//		srv.change(entity);
-//	}
-//
-//	@DeleteMapping("/{id}")
-//	@ResponseStatus(HttpStatus.NO_CONTENT)
-//	public void delete(@PathVariable int id) {
-//		srv.deleteById(id);
-//	}
+	
+	@PostMapping
+	@Transactional
+	public ResponseEntity<Object> create(@Valid @RequestBody RentalEditDTO item)
+			throws InvalidDataException, DuplicateKeyException, NotFoundException {
+		var entity = RentalEditDTO.from(item);
+		if (entity.isInvalid())
+			throw new InvalidDataException(entity.getErrorsMessage());
+		entity = srv.add(entity);
+		entity = srv.getOne(entity.getRentalId());
+		item.update(entity);
+		srv.change(entity);
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
+				.buildAndExpand(entity.getRentalId()).toUri();
+		return ResponseEntity.created(location).build();
+
+	}
+	
+	@PutMapping("/{id}")
+	@ResponseStatus(HttpStatus.ACCEPTED)
+	@Transactional
+	public void update(@PathVariable int id, @Valid @RequestBody RentalEditDTO item)
+			throws InvalidDataException, NotFoundException {
+		if (id != item.getRentalId())
+			throw new InvalidDataException("No coinciden los identificadores");
+		var entity = srv.getOne(id);
+		item.update(entity);
+		if (entity.isInvalid())
+			throw new InvalidDataException(entity.getErrorsMessage());
+		srv.change(entity);
+	}
+
+	@DeleteMapping("/{id}")
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void delete(@PathVariable int id) {
+		srv.deleteById(id);
+	}
 }
