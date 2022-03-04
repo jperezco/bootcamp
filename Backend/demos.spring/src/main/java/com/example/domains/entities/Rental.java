@@ -65,7 +65,6 @@ public class Rental extends EntityBase<Rental> implements Serializable {
 	// Este dato que lo genere él.No hay que usarlo en el constructor entonces.
 	@Generated(value = GenerationTime.ALWAYS)
 	@NotNull
-	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private Timestamp lastUpdate;
 
 	// bi-directional many-to-one association to Payment
@@ -84,8 +83,8 @@ public class Rental extends EntityBase<Rental> implements Serializable {
 		this.rentalId = rentalId;
 	}
 
-	public Rental(int rentalId, @NotNull Date rentalDate, @NotNull Inventory inventory, Customer customer,
-			Date returnDate, Staff staff) {
+	public Rental(int rentalId, @NotNull Date rentalDate, @NotNull Inventory inventory, @NotNull Customer customer,
+			Date returnDate, @NotNull Staff staff) {
 		this();
 		this.rentalId = rentalId;
 		this.rentalDate = rentalDate;

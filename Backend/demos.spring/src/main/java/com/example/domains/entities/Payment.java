@@ -40,13 +40,12 @@ public class Payment implements Serializable {
 
 	@Column(name="last_update")
 	@Generated(value = GenerationTime.ALWAYS)
-	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+	@NotNull
 	private Timestamp lastUpdate;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="payment_date")
 	@PastOrPresent
-	@NotNull
 	private Date paymentDate;
 
 	//bi-directional many-to-one association to Customer
