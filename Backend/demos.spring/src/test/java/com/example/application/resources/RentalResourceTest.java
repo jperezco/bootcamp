@@ -8,6 +8,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -22,8 +23,10 @@ import org.springframework.http.HttpStatus;
 import com.example.application.dtos.ActorDTO;
 import com.example.application.dtos.RentalDetailsDTO;
 import com.example.application.dtos.RentalEditDTO;
+import com.example.application.dtos.RentalShortDTO;
 import com.example.domains.contracts.services.ActorService;
 import com.example.domains.contracts.services.RentalsService;
+import com.example.domains.entities.Rental;
 import com.example.exceptions.DuplicateKeyException;
 import com.example.exceptions.InvalidDataException;
 import com.example.exceptions.NotFoundException;
@@ -31,17 +34,18 @@ import com.example.exceptions.NotFoundException;
 @SpringBootTest
 //@AutoConfigureMockMvc
 class RentalResourceTest {
-	List<RentalEditDTO> listado;
-	List<RentalDetailsDTO> listado2;
+	List<RentalShortDTO> listado;
+	List<Rental> listadoDetails;
 
 	@BeforeEach
 	void setUp() throws Exception {
 		
-		Date result1 =
-		listado = new ArrayList<RentalEditDTO>();
+		listado = new ArrayList<RentalShortDTO>();
+		listadoDetails = new ArrayList<Rental>();
 		
-		listado.add(new RentalEditDTO(1, ));
-		listado.add(new ActorDTO(2, "dos", "ados"));
+		listado.add(new RentalShortDTO(1, "uno", "auno"));
+		listado.add(new RentalShortDTO(2, "dos", "ados"));
+		listadoDetails.add(new Rental());
 	}
 
 	public static class IoCTestConfig {
@@ -72,7 +76,7 @@ class RentalResourceTest {
 		}
 		@Test
 		void testGetAll() {
-			when(srv.getByProjection(RentalEditDTO.class)).thenReturn(listado);
+			when(srv.getByProjection(RentalShortDTO.class)).thenReturn(listado);
 
 			var rslt = rest.getAll();
 
@@ -82,7 +86,7 @@ class RentalResourceTest {
 
 		@Test
 		void testGetOne() throws NotFoundException {
-			when(srv.getOne(1)).thenReturn(RentalEditDTO.from(listado.get(0)));
+			when(srv.getOne(1)).thenReturn(RentalDetailsDTO.from(listado.get(0)));
 
 			var rslt = rest.getOne(1);
 			assertNotNull(rslt);
