@@ -10,6 +10,8 @@ import javax.validation.constraints.PastOrPresent;
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.Objects;
@@ -38,6 +40,7 @@ public class Payment implements Serializable {
 
 	@Column(name="last_update")
 	@Generated(value = GenerationTime.ALWAYS)
+	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private Timestamp lastUpdate;
 
 	@Temporal(TemporalType.TIMESTAMP)

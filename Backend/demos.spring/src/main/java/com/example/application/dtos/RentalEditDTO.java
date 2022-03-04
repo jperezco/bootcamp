@@ -1,6 +1,5 @@
 package com.example.application.dtos;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -8,37 +7,46 @@ import javax.validation.constraints.NotNull;
 
 import com.example.domains.entities.Customer;
 import com.example.domains.entities.Inventory;
-import com.example.domains.entities.Language;
 import com.example.domains.entities.Payment;
 import com.example.domains.entities.Rental;
 import com.example.domains.entities.Staff;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Value;
 
 @Value
+@ApiModel(value = "Version editable del alquiler", description = "Informacion editable de los alquileres.")
 public class RentalEditDTO {
 	
 	@JsonProperty("IdAlquiler")
+	@ApiModelProperty(notes = "Identificador del alquiler.")
 	private int rentalId;
 	@JsonProperty("FechaAlquiler")
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+	@ApiModelProperty(value = "formato: yyyy-MM-dd hh:mm:ss", notes = "Fecha de inicio del alquiler")
 	private Date rentalDate;
 	@JsonProperty("idPelicula")
 	@NotNull
+	@ApiModelProperty(notes = "Id de la película alquilada")
 	private int inventory;
 	@JsonProperty("idCliente")
 	@NotNull
+	@ApiModelProperty(notes = "Id del cliente que ha alquilado la película.")
 	private int customerid;
 	@JsonProperty("fechaDevolucion")
-	@JsonFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
+	@ApiModelProperty(value = "formato: yyyy-MM-dd hh:mm:ss", notes = "Fecha del fin del alquiler")
 	private Date returnDate;
-	@JsonProperty("Empleado")
+	@JsonProperty("idEmpleado")
 	@NotNull
+	@ApiModelProperty(notes = "Id del empleado que ha tramitado el alquiler.")
 	private int empleado;
-	@JsonProperty("Precio")
-	private List<PaymentEditDTO> cantidad;
+	@JsonProperty("DatosPago")
+	@ApiModelProperty(notes = "Datos del pago.")
+	private List<PaymentEditDTO> datos;
 
 	public static RentalEditDTO from(Rental source) {
 		return new RentalEditDTO(
@@ -73,13 +81,13 @@ public class RentalEditDTO {
 		
 		//Borra los alquileres que sobran.
 		var delAlquiladas = target.getPayments().stream()
-				.filter(item -> cantidad.stream().noneMatch(pago -> pago.getPaymentId() == item.getPaymentId()))
+				.filter(item -> datos.stream().noneMatch(pago -> pago.getPaymentId() == item.getPaymentId()))
 				.toList();
 		delAlquiladas.forEach(item -> target.removePayment(item));
 		
 		//Actualizo los alquileres que han quedado.
 		target.getPayments().forEach(item -> {
-			var nuevoPago = cantidad.stream().filter(pago -> pago.getPaymentId() == item.getPaymentId()).findFirst().get();
+			var nuevoPago = datos.stream().filter(pago -> pago.getPaymentId() == item.getPaymentId()).findFirst().get();
 			if(item.getAmount() != nuevoPago.getAmount()) {
 				item.setAmount(nuevoPago.getAmount());
 			}
@@ -93,7 +101,7 @@ public class RentalEditDTO {
 		});
 		
 		//Añadimos los alquileres nuevos.
-		cantidad.stream()
+		datos.stream()
 			.filter(paymentDTO -> target.getPayments().stream().noneMatch(alquiler -> alquiler.getPaymentId() == paymentDTO.getPaymentId()))
 			.forEach(paymentDTO -> target.addPayment(new Payment(
 					paymentDTO.getPaymentId(), 

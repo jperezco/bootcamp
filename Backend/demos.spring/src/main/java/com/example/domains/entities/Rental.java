@@ -58,11 +58,14 @@ public class Rental extends EntityBase<Rental> implements Serializable {
 	// bi-directional many-to-one association to Staff
 	@ManyToOne
 	@JoinColumn(name = "staff_id")
+	@NotNull
 	private Staff staff;
 
 	@Column(name = "last_update")
 	// Este dato que lo genere él.No hay que usarlo en el constructor entonces.
 	@Generated(value = GenerationTime.ALWAYS)
+	@NotNull
+	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private Timestamp lastUpdate;
 
 	// bi-directional many-to-one association to Payment
