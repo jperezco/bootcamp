@@ -4,6 +4,7 @@ import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.PastOrPresent;
 
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
@@ -61,10 +62,10 @@ public class Rental extends EntityBase<Rental> implements Serializable {
 	@NotNull
 	private Staff staff;
 
-	@Column(name = "last_update")
-	// Este dato que lo genere él.No hay que usarlo en el constructor entonces.
+	@Column(name="last_update")
 	@Generated(value = GenerationTime.ALWAYS)
-	@NotNull
+	@PastOrPresent
+	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private Timestamp lastUpdate;
 
 	// bi-directional many-to-one association to Payment

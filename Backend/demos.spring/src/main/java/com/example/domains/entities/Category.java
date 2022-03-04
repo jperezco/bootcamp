@@ -3,6 +3,7 @@ package com.example.domains.entities;
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
 
 import org.hibernate.annotations.Generated;
 import org.hibernate.annotations.GenerationTime;
@@ -36,6 +37,7 @@ public class Category extends EntityBase<Category> implements Serializable {
 
 	@Column(name="last_update")
 	@Generated(value = GenerationTime.ALWAYS)
+	@PastOrPresent
 	@JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss")
 	private Timestamp lastUpdate;
 

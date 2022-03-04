@@ -50,8 +50,7 @@ public class RentalResource {
 	@Transactional
 	@ApiOperation(value = "Listado de los alquileres")
 	public List<RentalShortDTO> getAll() {
-//		return srv.getAll().stream().map(item -> RentalShortDTO.from(item)).toList();
-		return srv.getByProjection(RentalShortDTO.class);
+		return srv.getAll().stream().map(item -> RentalShortDTO.from(item)).toList();
 	}
 
 	@GetMapping(params = "page")
@@ -100,7 +99,7 @@ public class RentalResource {
 		if (entity.isInvalid())
 			throw new InvalidDataException(entity.getErrorsMessage());
 		entity = srv.add(entity);
-		entity = srv.getOne(entity.getRentalId());
+//		entity = srv.getOne(entity.getRentalId());
 		item.update(entity);
 		srv.change(entity);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")

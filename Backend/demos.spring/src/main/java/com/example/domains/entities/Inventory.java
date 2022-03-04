@@ -2,6 +2,10 @@ package com.example.domains.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+
 import java.sql.Timestamp;
 import java.util.List;
 import java.util.Objects;
@@ -23,6 +27,7 @@ public class Inventory implements Serializable {
 	private int inventoryId;
 
 	@Column(name="last_update")
+	@Generated(value = GenerationTime.ALWAYS)
 	private Timestamp lastUpdate;
 
 	//bi-directional many-to-one association to Film

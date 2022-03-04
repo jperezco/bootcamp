@@ -20,6 +20,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 
 import com.example.application.dtos.ActorDTO;
+import com.example.application.dtos.RentalDetailsDTO;
 import com.example.application.dtos.RentalEditDTO;
 import com.example.domains.contracts.services.ActorService;
 import com.example.domains.contracts.services.RentalsService;
@@ -31,6 +32,7 @@ import com.example.exceptions.NotFoundException;
 //@AutoConfigureMockMvc
 class RentalResourceTest {
 	List<RentalEditDTO> listado;
+	List<RentalDetailsDTO> listado2;
 
 	@BeforeEach
 	void setUp() throws Exception {
@@ -70,7 +72,7 @@ class RentalResourceTest {
 		}
 		@Test
 		void testGetAll() {
-			when(srv.getByProjection(ActorDTO.class)).thenReturn(listado);
+			when(srv.getByProjection(RentalEditDTO.class)).thenReturn(listado);
 
 			var rslt = rest.getAll();
 
@@ -80,11 +82,11 @@ class RentalResourceTest {
 
 		@Test
 		void testGetOne() throws NotFoundException {
-			when(srv.getOne(1)).thenReturn(ActorDTO.from(listado.get(0)));
+			when(srv.getOne(1)).thenReturn(RentalEditDTO.from(listado.get(0)));
 
 			var rslt = rest.getOne(1);
 			assertNotNull(rslt);
-			assertEquals(1, rslt.getActorId());
+			assertEquals(1, rslt.getRentalId());
 		}
 
 		@Test
@@ -96,7 +98,7 @@ class RentalResourceTest {
 
 		@Test
 		void testCreate() throws NotFoundException, DuplicateKeyException, InvalidDataException {
-			when(srv.add(any())).thenReturn(ActorDTO.from(listado.get(0)));
+			when(srv.add(any())).thenReturn(RentalEditDTO.from(listado.get(0)));
 
 			var rslt = rest.create(listado.get(0));
 			assertNotNull(rslt);
@@ -117,10 +119,10 @@ class RentalResourceTest {
 
 		@Test
 		void testUpdate() throws NotFoundException, InvalidDataException {
-			when(srv.change(any())).thenReturn(ActorDTO.from(listado.get(0)));
+			when(srv.change(any())).thenReturn(RentalEditDTO.from(listado.get(0)));
 
 			rest.update(1, listado.get(0));
-			verify(srv).change(ActorDTO.from(listado.get(0)));
+			verify(srv).change(RentalEditDTO.from(listado.get(0)));
 		}
 
 		@Test
@@ -135,7 +137,7 @@ class RentalResourceTest {
 		}
 		@Test
 		void testUpdateInvalidData() throws NotFoundException, InvalidDataException {
-			assertThrows(InvalidDataException.class, () -> rest.update(1, new ActorDTO()));
+			assertThrows(InvalidDataException.class, () -> rest.update(1, new RentalEditDTO()));
 		}
 
 		@Test

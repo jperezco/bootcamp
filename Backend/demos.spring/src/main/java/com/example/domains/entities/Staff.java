@@ -2,6 +2,10 @@ package com.example.domains.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -32,6 +36,7 @@ public class Staff implements Serializable {
 	private String lastName;
 
 	@Column(name="last_update")
+	@Generated(value = GenerationTime.ALWAYS)
 	private Timestamp lastUpdate;
 
 	private String password;

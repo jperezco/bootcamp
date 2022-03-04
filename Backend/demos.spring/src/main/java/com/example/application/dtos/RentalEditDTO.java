@@ -72,7 +72,6 @@ public class RentalEditDTO {
 	}
 	
 	public Rental update(Rental target) {
-		target.setRentalId(rentalId);
 		target.setRentalDate(rentalDate);
 		target.setInventory(new Inventory(inventory));
 		target.setCustomer(new Customer(customerid));
