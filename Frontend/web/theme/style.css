@@ -1,0 +1,64 @@
+@import url("formulario.css");
+
+@font-face {
+  font-family: "Principal";
+  src: url("Honey Baby.ttf") format("truetype");
+}
+
+:root {
+  --color-error-letra: black;
+  --color-error-fondo: white;
+  --color-border: rgb(165, 21, 21);
+}
+
+#logo {
+  width: 200px;
+  background-color: var(--color-border);
+}
+
+h1 {
+  color: blue;
+}
+
+/*Creamos una clase*/
+.error {
+  color: var(--color-error-letra);
+  background-color: var(--color-error-fondo);
+}
+
+.grande {
+  /*Letra un 20% más grande del tamaño normal*/
+  font-size: 1.2em;
+}
+
+/*Al siguiente párrafo que vaya detrás del h1 aplícale esto*/
+h1 + p {
+  font-style: italic;
+}
+
+h1 + p::first-letter {
+  font-size: 3em;
+  font-weight: bold;
+}
+
+/*Que al imprimir no se vean esos botones y la letra sea más pequeña.*/
+@media print {
+  body {
+    font-size: 20pt !important;
+  }
+  input[type="submit"],
+  input[type="reset"],
+  button {
+    display: none;
+  }
+  input {
+    border-style: none;
+  }
+}
+
+/*Este estilo entra en conflicto con el anterior, por eso este último lo hemos marcado
+con important.*/
+body {
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 8pt;
+}
