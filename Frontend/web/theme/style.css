@@ -9,6 +9,7 @@
   --color-error-letra: black;
   --color-error-fondo: white;
   --color-border: rgb(165, 21, 21);
+  --tamaño-base: 1em;
 }
 
 #logo {
@@ -59,6 +60,25 @@ h1 + p::first-letter {
 /*Este estilo entra en conflicto con el anterior, por eso este último lo hemos marcado
 con important.*/
 body {
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
   font-size: 8pt;
+}
+
+@media (max-width: 999px) {
+  body {
+    font-size: var(--tamaño-base);
+  }
+}
+
+@media (max-width: 726px) {
+  body {
+    font-size: calc(var(--tamaño-base) * 1.4);
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  body {
+    font-size: calc(var(--tamaño-base) * 1.6);
+    background-color: bisque;
+  }
 }
