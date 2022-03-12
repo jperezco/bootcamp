@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./theme/formulario2.css" />
+    <title>Formulario</title>
+  </head>
+
+  <form>
+    <h1>Forma de pago</h1>
+    <p>
+      Los campos obligatorios van seguidos de
+      <strong> <abbr title="required"> * </abbr> </strong>.
+    </p>
+    <section>
+      <h2>Información de contacto</h2>
+      <fieldset>
+        <legend>Título</legend>
+        <ul>
+          <li>
+            <label for="title_1">
+              <input type="radio" id="title_1" name="title" value="K" />
+              Rey
+            </label>
+          </li>
+          <li>
+            <label for="title_2">
+              <input type="radio" id="title_2" name="title" value="Q" />
+              Reina
+            </label>
+          </li>
+          <li>
+            <label for="title_3">
+              <input type="radio" id="title_3" name="title" value="J" />
+              Bufón
+            </label>
+          </li>
+        </ul>
+      </fieldset>
+      <p>
+        <label for="name">
+          <span>Nombre:</span>
+          <strong><abbr title="required">*</abbr></strong>
+        </label>
+        <input type="text" id="name" name="username" />
+      </p>
+      <p>
+        <label for="mail">
+          <span>Correo electrónico:</span>
+          <strong><abbr title="required">*</abbr></strong>
+        </label>
+        <input type="email" id="mail" name="usermail" />
+      </p>
+      <p>
+        <label for="pwd">
+          <span>Contraseña:</span>
+          <strong><abbr title="required">*</abbr></strong>
+        </label>
+        <input type="password" id="pwd" name="password" />
+      </p>
+    </section>
+    <section>
+      <h2>Información de pago</h2>
+      <p>
+        <label for="card">
+          <span>Tipo de tarjeta:</span>
+        </label>
+        <select id="card" name="usercard">
+          <option value="visa">Visa</option>
+          <option value="mc">Mastercard</option>
+          <option value="amex">American Express</option>
+        </select>
+      </p>
+      <p>
+        <label for="number">
+          <span>Número de tarjeta:</span>
+          <strong><abbr title="required">*</abbr></strong>
+        </label>
+        <input type="tel" id="number" name="cardnumber" />
+      </p>
+      <p>
+        <label for="date">
+          <span>Fecha de caducidad:</span>
+          <strong><abbr title="required">*</abbr></strong>
+          <em>el formato mm/aa</em>
+        </label>
+        <input type="date" id="date" name="expiration" />
+      </p>
+    </section>
+    <p><button type="submit">Validar el pago</button></p>
+  </form>
+</html>

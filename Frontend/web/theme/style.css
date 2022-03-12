@@ -81,4 +81,8 @@ body {
     font-size: calc(var(--tamaño-base) * 1.6);
     background-color: bisque;
   }
+  /*Que no se vean los vídeos en pantallas tan pequeñas*/
+  video{
+    display: none;
+  }
 }

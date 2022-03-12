@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="./theme/formulario.css" />
+    <title>Formulario</title>
+  </head>
+
+  <body>
+    <!--Definimos formalmente que trabajamos con un formulario. Con action establecemos
+    a qué URL se enviará la información y con method el protocolo HTTP utilizado-->
+    <form action="/my-handling-form-page" method="post">
+      <ul>
+        <li>
+          <label for="name">Nombre:</label>
+          <input type="text" id="name" name="user_name" />
+        </li>
+        <li>
+          <label for="mail">Correo electrónico:</label>
+          <input type="email" id="mail" name="user_mail" value="xxxx@xxx.com" />
+        </li>
+        <li>
+          <label for="msg">Mensaje:</label>
+          <textarea id="msg" name="user_message">
+              Si quiere aclarar algo, escriba en esta caja.
+          </textarea>
+        </li>
+        <li class="button">
+          <button type="submit">Envíe su mensaje</button>
+        </li>
+      </ul>
+      <p>
+        <input type="checkbox" id="taste_1" name="taste_cherry" value="cherry">
+        <label for="taste_1">Me gustan las cerezas</label>
+      </p>
+      <p>
+        <input type="checkbox" id="taste_2" name="taste_banana" value="banana">
+        <label for="taste_2">Me gustan los plátanos</label>
+      </p>
+    </form>
+  </body>
+</html>
+
