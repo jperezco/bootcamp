@@ -1,0 +1,75 @@
+:root {
+  --tamaño-base: 1.3em;
+}
+
+body {
+  background-color: beige;
+}
+
+main{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+h1 {
+  color: darkorange;
+  font-size: var(--tamaño-base);
+}
+
+hr {
+  position: absolute;
+  height: 1px;
+  width: 90%;
+  background-color: black;
+  text-align: left;
+}
+
+.sectionOne{   
+    width: 30%;
+}
+
+.sectionTwo{
+    width: 30%;
+}
+
+.header {
+  width: 90%;
+  background-color: white;
+  font-size: var(--tamaño-base);
+  list-style: none;
+}
+
+.navigation {
+  list-style: none;
+}
+
+.pizzaOne {
+  width: 300px;
+  height: 300px;
+
+}
+
+.pizzaTwo{
+    width: 20em;
+    height:18em;
+    background-position: 100% 100%;
+}
+
+@media (max-width: 999px) {
+  body {
+    font-size: var(--tamaño-base);
+  }
+}
+
+@media (max-width: 726px) {
+  body {
+    font-size: calc(var(--tamaño-base) * 1.4);
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  body {
+    font-size: calc(var(--tamaño-base) * 1.6);
+  }
+}
