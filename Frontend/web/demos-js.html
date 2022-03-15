@@ -17,33 +17,107 @@
       console.log(c);
       //El asterisco no tiene dualidad, así que va a multiplicar aunque sea una cadena.
       //La convertirá en tipo numérico.
-      c = a*b;
-      console.log(c)
+      c = a * b;
+      console.log(c);
 
-      function kk(){
-          var x = 1;
-          if(true){
-              var y = 1;
-          }
-          c = x + y;
-          return c;
+      function kk() {
+        var x = 1;
+        if (true) {
+          var y = 1;
+        }
+        c = x + y;
+        return c;
       }
 
-      if(kk() === c){
-          console.log("Idénticos")
+      if (kk() === c) {
+        console.log("Idénticos");
       }
 
       t = [10, 20, 30];
-      t = {x  : 10, y : 20}
+      t = { x: 10, y: 20 };
 
       //Recorre el índice del objeto
-      for (var i in t){
-          console.log(t[i]);
+      for (var i in t) {
+        console.log(t[i]);
       }
 
       //Recorre el value del objeto
-      for (var i of t){
-          console.log(i)
+      for (var i of t) {
+        console.log(i);
+      }
+
+      function avg() {
+        var rslt = 0;
+        for (var i = 0; i < arguments.length; i++) {
+          rslt += arguments[i];
+        }
+        return arguments.length ? rslt / arguments.length : 0;
+      }
+
+      function suma(a, b) {
+        return a + b;
+      }
+
+      //Expresión lambda.
+      suma = (a, b) => a + b;
+
+      console.log(suma(2, 2));
+
+      suma = function (a, b) {
+        return a + b;
+      };
+
+      suma = 5;
+
+      //Objeto o Array Asociativo.
+      o = { x: 10, y: 20, suma: (x, y) => this.x + this.y };
+      console.log(o, o.x, o.y, o.suma(2, 3));
+      //Le añadimos un nuevo elemento.
+      o.z = 30;
+      delete o.x;
+
+      function Punto(x, y) {
+        this.x = x;
+        this.y = y;
+        this.suma = () => this.x + this.y;
+      }
+
+      let p1 = new Punto(10, 20);
+      let p2 = new Punto(20, 10);
+      console.log(p1, p2);
+      console.log(p1.suma());
+      console.log(p2.suma());
+
+      //Sintaxis alternativa de la función Punto creada más arriba.
+      class PuntoConClase {
+
+          //Propiedades.
+          constructor(x, y) {
+            this.x = x;
+            this.y = y;
+          }
+
+          //Método.
+          suma(){
+              return this.x + this.y;
+          }
+
+          //Atributo: método que controla la salida y método que controla la entrada.
+          get X() {return this.x;}
+          set X(valor) {
+              if (valor < 0){
+                  throw new Error('No puede ser negativo')
+              }
+              this.x = valor
+          }
+      }
+
+      let p5 = new PuntoConClase(3,3);
+
+      //Como le estamos preguntando por un valor, se va al método get.
+      if(p5.X == 5){
+          //Como le estamos asignando un valor se va al método set
+          p5.X = 0;
       }
     </script>
   </body>
