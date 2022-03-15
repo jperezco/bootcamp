@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Demos JS</h1>
+    <script>
+      var a = 3;
+      var b = "2";
+      //Va a concatenar, no sumar, ya que el + es operador de concatenación para la
+      //cadena.
+      c = a + b;
+      console.log(c);
+      //El asterisco no tiene dualidad, así que va a multiplicar aunque sea una cadena.
+      //La convertirá en tipo numérico.
+      c = a*b;
+      console.log(c)
+
+      function kk(){
+          var x = 1;
+          if(true){
+              var y = 1;
+          }
+          c = x + y;
+          return c;
+      }
+
+      if(kk() === c){
+          console.log("Idénticos")
+      }
+
+      t = [10, 20, 30];
+      t = {x  : 10, y : 20}
+
+      //Recorre el índice del objeto
+      for (var i in t){
+          console.log(t[i]);
+      }
+
+      //Recorre el value del objeto
+      for (var i of t){
+          console.log(i)
+      }
+    </script>
+  </body>
+</html>
