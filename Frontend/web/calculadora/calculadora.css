@@ -1,0 +1,74 @@
+* {
+  color: rgb(10, 10, 10);
+}
+
+body {
+  margin: 0;
+  background-color: rgba(0, 0, 0, 0.747);
+}
+
+.contenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50em;
+}
+
+.calculadora {
+  display: grid;
+  grid-template-columns: repeat(4, 6.0em);
+  grid-template-rows: 160px repeat(5, 5em);
+  background-color: #919995;
+  padding: 0.8em;
+  border-radius: 0em;
+  box-shadow: 15px 10px 0px 5px #00000033;
+}
+
+button {
+  cursor: pointer;
+  margin: 5px;
+  padding: 0;
+  border-radius: 0em;
+  font-size: 1.5em;
+  border: none;
+  background-color: rgb(226, 222, 222);
+  box-shadow: 5px 5px 10px -3px rgba(0, 0, 0, 0.251), -5px -5px 15px 3px rgba(12, 12, 12, 0.122);
+}
+
+button:active {
+  background-color: rgba(30, 34, 33, 0.082);
+}
+button:focus {
+  outline: none;
+}
+
+.doble-columna {
+  grid-column: span 2;
+}
+
+.pantalla {
+  grid-column: 1 / -1;
+  padding: 16px;
+  display: flex;
+  margin: 10px 10px 20px;
+  flex-direction: column;
+  align-items: flex-end;
+  background-color: rgba(83, 202, 223, 0.603);
+  border-radius: 0em;
+  text-align: right;
+  justify-content: space-between;
+  word-break: break-all;
+  box-shadow: 0px 0px 0px 10px #00000033;
+}
+
+.operador{
+    background-color: rgb(12, 76, 129);
+}
+
+.valor-actual{
+    font-size: 1.5em;
+}
+
+.valor-anterior{
+    font-size: 2em;
+}
