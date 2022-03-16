@@ -1,19 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ejercicios JS</title>
-</head>
-<body>
-    <script src = "./ejercicios.js"></script>
+  </head>
+  <body>
+    <main>
+      <fieldset>
+        <label id="lbPideNumero" for="txtNumero">Dame el número</label>
+        <input id="txtNumero" type="number" />
+        <button id="btnJugar" type="button">Jugar</button>
+      </fieldset>
+    </main>
+    <script src="./ejercicios.js"></script>
     <script>
-        // Ejercicio0();
-        //console.log(dameValores());
-        // console.log(Ejercicio1(1, 10));
-        //Ejercicio2();
-        console.log(Ejercicio3(4));
+      (function () {
+        let juego = new Juego(10,100);
+        let lbPideNumero = document.querySelector('#lbPideNumero');
+        let txtNumero = document.querySelector('#txtNumero');
+        let btnJugar = document.getElementById('btnJugar');
+        btnJugar.addEventListener('click', function(ev){
+            alert(txtNumero.value)
+            lbPideNumero.textContent += 'x';
+        })
+        txtNumero.addEventListener('change', function(){
+            console.log(txtNumero.value)
+        })
+      })();
     </script>
-</body>
+    <script>
+      // Ejercicio0();
+      //console.log(dameValores());
+      // console.log(Ejercicio1(1, 10));
+      //Ejercicio2();
+      //console.log(Ejercicio3(4));
+      // console.log(Ejercicio4(10));
+      // console.log(Ejercicio5('48844718D'));
+      // console.log(Ejercicio6('La ruta nos aporto otro paso natural'))
+      // let juego = new JuegoDelNumero();
+      // juego.inicializar();
+      // juego.jugada(25);
+      // console.log(juego.getResultado());
+      // juego.inicializar();
+      // juego.jugada(25);
+      // console.log(juego.getResultado());
+    </script>
+  </body>
 </html>
