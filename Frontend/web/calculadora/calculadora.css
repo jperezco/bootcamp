@@ -4,7 +4,7 @@
 
 body {
   margin: 0;
-  background-color: rgba(0, 0, 0, 0.747);
+  background-color: rgb(241, 235, 235);
 }
 
 .contenedor {
@@ -36,7 +36,7 @@ button {
 }
 
 button:active {
-  background-color: rgba(30, 34, 33, 0.082);
+  background-color: rgba(66, 78, 75, 0.082);
 }
 button:focus {
   outline: none;
