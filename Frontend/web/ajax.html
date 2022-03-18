@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejemplo AJAX</title>
+  </head>
+  <body>
+    <main>
+      <h1>Películas</h1>
+      <section id="listado"></section>
+      <section id="paginacion"></section>
+    </main>
+    <img
+      id="ajaxwait"
+      src="./images/spinning-loading.gif"
+      alt="Cargando ..."
+      hidden
+    />
+    <script>
+      function cargaPagina(page = 0) {
+        let xmlhttp = new XMLHttpRequest();
+        // Preparamos la respuesta.
+        xmlhttp.onreadystatechange = function () {
+          if (xmlhttp.readyState == 4) {
+            document.querySelector("#ajaxwait").hidden = true;
+            document.querySelector("#listado").hidden = false;
+            if (xmlhttp.status == 200) {
+              let resp = JSON.parse(xmlhttp.responseText);
+              let listado = "<ul>";
+              for (let peli of resp.content)
+                listado += `<li>${peli.titulo}</li>`;
+              listado += `</ul>`;
+              document.querySelector("#listado").innerHTML = listado;
+              let paginacion = "<div>";
+              for (let i = 0; i < resp.totalPages; i++) {
+                paginacion += `<input type="button" value="${
+                  i + 1
+                }" onclick="cargaPagina(${i})">`;
+                paginacion += `</div>`;
+                
+              }
+            } else {
+              document.querySelector("#listado").textContent = xmlhttp.status;
+            }
+          }
+        };
+        document.querySelector("#ajaxwait").hidden = false;
+        document.querySelector("#listado").hidden = true;
+        xmlhttp.open("get", `http://localhost:8001/api/films?page=${page}`);
+        xmlhttp.send();
+      }
+      cargaPagina(0);
+    </script>
+  </body>
+</html>
