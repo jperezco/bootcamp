@@ -53,11 +53,19 @@ class Calculadora {
   }
 
   imprimirValorAnterior(operador) {
-    this.valorAnterior.textContent = this.calcula(
-      this.valorActual.textContent,
-      operador
-    );
-    this.valorAnterior.textContent += operador;
+    if (operador == '='){
+      this.valorAnterior.textContent = this.calcula(
+        this.valorActual.textContent,
+        operador
+      );
+    } else{
+      this.valorAnterior.textContent = this.calcula(
+        this.valorActual.textContent,
+        operador
+      );
+      this.valorAnterior.textContent += ' ' + operador;
+    }
+    
   }
 
   borrarTodo() {
