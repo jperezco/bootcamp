@@ -1,0 +1,28 @@
+<body>
+  <div class="contenedor">
+    <div class="calculadora">
+      <div class="pantalla">
+        <div class="valor-anterior">{{valorAnterior}}</div>
+        <div class="valor-actual">{{valorActual}}</div>
+      </div>
+      <button class="doble-columna borrar-todo" (click)="borrarTodo()">C</button>
+      <button class="borrar-numero" (click)="borrarUno()">&larr;</button>
+      <button class="operador" (click)="mostrarValorAnterior('/')">/</button>
+      <button class="numero" (click)="mostrarValorActual('7')">7</button>
+      <button class="numero" (click)="mostrarValorActual('8')">8</button>
+      <button class="numero" (click)="mostrarValorActual('9')">9</button>
+      <button class="operador" (click)="mostrarValorAnterior('*')">*</button>
+      <button class="numero" (click)="mostrarValorActual('4')">4</button>
+      <button class="numero" (click)="mostrarValorActual('5')">5</button>
+      <button class="numero" (click)="mostrarValorActual('6')">6</button>
+      <button class="operador" (click)="mostrarValorAnterior('-')">-</button>
+      <button class="numero" (click)="mostrarValorActual('1')">1</button>
+      <button class="numero" (click)="mostrarValorActual('2')">2</button>
+      <button class="numero" (click)="mostrarValorActual('3')">3</button>
+      <button class="operador" (click)="mostrarValorAnterior('+')">+</button>
+      <button class="doble-columna numero" (click)="mostrarValorActual('0')">0</button>
+      <button class="numero" (click)="mostrarDecimal()">.</button>
+      <button class="operador" (click)="mostrarIgual()">=</button>
+    </div>
+  </div>
+</body>
