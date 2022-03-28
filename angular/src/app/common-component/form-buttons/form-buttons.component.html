@@ -1,0 +1,9 @@
+<b>
+  <input
+    type="button"
+    value="enviar"
+    (click)="send.emit(null)"
+    [disabled]="disabled"
+  />
+  <input type="button" value="volver" (click)="cancel.emit(null)" />
+</b>

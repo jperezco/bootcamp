@@ -14,6 +14,10 @@ import { CommonServicesModule } from './common-services';
 import { DinamicoComponent } from './dinamico/dinamico.component';
 import { CalculadoraComponent } from './calculadora/calculadora.component';
 import { FormularioComponent } from './formulario/formulario.component';
+import { ContactosModule } from './contactos';
+import { ShowErrorMessagesComponent } from './common-component/show-error-messages/show-error-messages.component';
+import { FormButtonsComponent } from './common-component/form-buttons/form-buttons.component';
+import { CommonComponentModule } from './common-component';
 
 @NgModule({
   declarations: [
@@ -21,11 +25,12 @@ import { FormularioComponent } from './formulario/formulario.component';
     DemosComponent,
     DinamicoComponent,
     CalculadoraComponent,
-    FormularioComponent
+    FormularioComponent,
   ],
   imports: [
     BrowserModule, FormsModule, HttpClientModule,
     AppRoutingModule, MainModule, SecurityModule, MyCoreModule, CommonServicesModule,
+    ContactosModule, CommonComponentModule,
   ],
   providers: [
     LoggerService,
