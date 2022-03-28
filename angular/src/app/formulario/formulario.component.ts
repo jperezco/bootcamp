@@ -1,5 +1,4 @@
 import { Component, OnInit, Output } from '@angular/core';
-import * as EventEmitter from 'events';
 import { FormularioVMService } from './formulario-vm.service';
 
 @Component({
