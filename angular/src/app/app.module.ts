@@ -16,6 +16,7 @@ import { CalculadoraComponent } from './calculadora/calculadora.component';
 import { FormularioComponent } from './formulario/formulario.component';
 import { ContactosModule } from './contactos';
 import { CommonComponentModule } from './common-component';
+import { PizzasModule } from './pizzas';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,7 @@ import { CommonComponentModule } from './common-component';
   imports: [
     BrowserModule, FormsModule, HttpClientModule,
     AppRoutingModule, MainModule, SecurityModule, MyCoreModule, CommonServicesModule,
-    ContactosModule, CommonComponentModule,
+    ContactosModule, CommonComponentModule, PizzasModule,
   ],
   providers: [
     LoggerService,
